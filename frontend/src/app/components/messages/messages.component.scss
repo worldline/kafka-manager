@@ -1,0 +1,34 @@
+.card-footer-flex {
+    display: flex;
+}
+
+.advanced-mode {
+    border-color: #979696;
+    border-style: solid;
+    border-width: 1px 0 1px 0;
+    padding: 10px 0;
+    margin: 10px 0;
+
+    span {
+        cursor: pointer;
+        margin-left: 5px;
+        font-weight: 700;
+
+        i {
+            padding-right: 5px;
+        }
+    }
+}
+
+.show-more {
+    display: none;
+    margin-left: 10px;
+}
+
+.show-more.show {
+    display: block;
+}
+
+.ng-select.messsage-select ::ng-deep .ng-select-container {
+    height: 38px;
+}

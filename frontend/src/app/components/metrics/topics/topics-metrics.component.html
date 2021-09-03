@@ -1,0 +1,17 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'metrics.topics.heat.title' | translate }}</h3>
+            </div>
+            <div class="card-body">
+                <app-chart-heat *ngIf="heatData" (yClick)="goToTopic($event)" [data]="heatData"></app-chart-heat>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    <!-- /.card -->
+    </div>
+</section>
+<!-- /.content -->

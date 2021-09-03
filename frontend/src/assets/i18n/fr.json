@@ -1,0 +1,13 @@
+{
+  "common": {
+    "webapp": {
+      "title": "Kafka Manager",
+      "icon": "KafkaManager par Worldline"
+    },
+    "modal": {
+      "cancel": "Annuler",
+      "confirm": "OK",
+      "delete": "Supprimer"
+    }
+  }
+}

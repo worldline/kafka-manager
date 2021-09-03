@@ -1,0 +1,28 @@
+.settings-description {
+  font-size: 80%;
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+.settings-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.settings-mode {
+  font-style: italic;
+}
+
+.settings-not-default {
+  background-color: bisque;
+}
+
+.settings-select {
+  flex-grow: 1;
+}
+
+.ng-select.settings-select ::ng-deep .ng-select-container {
+    height: 41px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}

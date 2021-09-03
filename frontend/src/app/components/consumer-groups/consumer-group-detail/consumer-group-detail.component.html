@@ -1,0 +1,54 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <div class="card" hasRole="ADMIN">
+            <div class="card-body header-actions">
+                <button type="button" class="btn btn-primary mr-2" (click)="resetOffset()">{{ 'consumerGroups.detail.buttons.resetOffset' | translate }}</button>
+                <button type="button" class="btn btn-danger" (click)="deleteModalState=true">{{ 'consumerGroups.detail.buttons.delete' | translate }}</button>
+                <app-modal classType="bg-danger" (execute)="deleteGroup()" (toggleModal)="deleteModalState=$event" modalTitle="consumerGroups.detail.buttons.delete" [displayModal]="deleteModalState">
+                    <p>{{ 'consumerGroups.detail.modal.delete-content' | translate }}</p>
+                </app-modal>
+            </div>
+        </div>
+
+        <div class="card card-dark">
+            <div class="card-header">
+                <h2 class="card-title">{{ 'consumerGroups.detail.info.title' | translate }}: {{ consumerGroup.groupId }}</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12" *ngFor="let cardIndicator of cardIndicators">
+                                    <app-card-indicator [cardIndicator]="cardIndicator"></app-card-indicator>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="card-body">
+                            <dl>
+                                <dt>{{ 'consumerGroups.detail.partitionAssignor' | translate }}</dt>
+                                <dd>{{ consumerGroup.partitionAssignor | titlecase }}</dd>
+
+                                <dt>{{ 'consumerGroups.detail.simpleConsumerGroup.label' | translate }}</dt>
+                                <span *ngIf="consumerGroup.isSimpleConsumerGroup; else elseBlock"><dd>{{ 'consumerGroups.detail.simpleConsumerGroup.simple' | translate }}</dd></span>
+                                <ng-template #elseBlock><dd>{{ 'consumerGroups.detail.simpleConsumerGroup.highLevel' | translate }}</dd></ng-template>
+
+                                <dt>{{ 'consumerGroups.detail.coordinator' | translate }}</dt>
+                                <dd>{{ consumerGroup.coordinator.host }}:{{ consumerGroup.coordinator.port }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /.card-body -->
+        </div>
+        <app-consumer-list (computedLag)="setComputedLag($event)" [consumers]="consumerGroup.members"></app-consumer-list>
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->

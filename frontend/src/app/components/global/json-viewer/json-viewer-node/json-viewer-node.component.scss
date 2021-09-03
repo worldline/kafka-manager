@@ -1,0 +1,55 @@
+.nodeKey {
+    &.nodeKeyAttribute {
+        color: grey;
+        margin-left: 10px;
+    }
+    &.nodeKeyValue {
+
+    }
+    &.nodeKeyNbSubNodes {
+        margin-left: 10px;
+    }
+}
+.nodeValue {
+    color: #3c8dbc;
+}
+
+.nodeValueUpdated {
+    background-color: yellow;
+}
+
+.nodeTransformValue {
+    background-color: #3c8dbc;
+    color: white;
+    margin-left: 20px;
+    border-radius: 3px;
+    padding: 3px;
+}
+
+ul {
+    list-style-type: none;
+    padding-right: 40px;
+}
+
+li {
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+.complexeNode {
+    display: flex;
+    align-items: center;
+    .nodeText {
+        flex-grow: 1;
+    }
+    .btn-open {
+        width: 35px;
+    }
+    .menuButtons {
+        display: flex;
+        align-items: center;
+    }
+    &.complexeNodeHover:hover {
+        background-color: #F4F4F4;
+    }
+}

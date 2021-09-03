@@ -1,0 +1,27 @@
+.action-bar {
+    float: right;
+    button {
+        margin-left: 10px;
+    }
+}
+
+.cluster-actions {
+    a {
+        cursor: pointer;
+        margin-right: 10px;
+    }
+}
+
+.nav-link-action {
+    display: block;
+    padding: 0.5rem 1rem;
+    float: right;
+
+    a {
+        padding-left: .5rem;
+    }
+}
+
+.comment-field {
+    max-width: 400px;
+}

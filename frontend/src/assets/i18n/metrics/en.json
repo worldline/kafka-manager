@@ -1,0 +1,71 @@
+{
+  "metrics" : {
+    "topics": {
+      "title": "Monitoring",
+      "heat": {
+        "title": "Heat map"
+      }
+    },
+    "topic": {
+      "title": "Topic measure : {{topicName}}",
+      "jmx": {
+        "title": "Stream measure",
+        "tabs": {
+          "last": "Current",
+          "chart": "History"
+        },
+        "alerts": {
+          "title": "Unavailable functionality",
+          "text": "JMX connection is mandatory to retrieve those information"
+        }
+      },
+      "lag": {
+        "title": "Lag by consumer group",
+        "tabs": {
+          "last": "Current",
+          "chart": "History"
+        },
+        "form": {
+          "byPartition": "Display by partition"
+        }
+      },
+      "charts": {
+        "refresh": "Refresh",
+        "messagesPerSeconds": "Messages in / sec",
+        "bytesInPerSeconds": "Bytes in / sec",
+        "bytesOutPerSeconds": "Bytes out / sec",
+        "bytesRejectedPerSeconds": "Bytes rejected / sec",
+        "failedFetchPerSeconds": "Failed fetch request / sec",
+        "failedProducePerSeconds": "Failed produce request / sec",
+        "messages": {
+          "error": {
+            "title": "Load chart",
+            "text": "Cannot load the chart"
+          }
+        }
+      },
+      "currentLag": {
+        "groupId": "Group ID",
+        "partition": "Partition ID",
+        "currentOffset": "Current offset",
+        "endOffset": "End offset",
+        "lag": "Lag"
+      },
+      "currentMetrics": {
+        "metric": "Measure type",
+        "mean": "Mean",
+        "oneMn": "1 min",
+        "fiveMn": "5 min",
+        "fifteenMn": "15 min",
+        "messages": {
+          "error": {
+            "get": {
+              "title": "Getting measures",
+              "text": "No measure is available for this topic"
+            }
+          }
+        }
+      }
+    }
+  }
+}

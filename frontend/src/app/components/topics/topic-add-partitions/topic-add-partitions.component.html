@@ -1,0 +1,34 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+       <div class="card card-primary">
+           <form role="form" [formGroup]="partitionForm" (ngSubmit)="onSubmit()">
+               <div class="card-body">
+                   <div class="form-group">
+                       <label for="topic-name">{{ 'topics.addPartitions.form.topicName.label' | translate }}</label>
+                       <input type="text" disabled="true" class="form-control" id="topic-name" placeholder="{{ 'topics.addPartitions.form.name.placeholder' | translate }}" formControlName="topicName">
+                   </div>
+                   <div class="form-group">
+                       <label for="nb-partitions">{{ 'topics.addPartitions.form.nbPartitions.label' | translate:{ nbPartitions: topic.nbPartitions } }}</label>
+                       <input type="number" class="form-control" id="nb-partitions" placeholder="{{ 'topics.addPartitions.form.nbPartitions.placeholder' | translate }}" formControlName="nbPartitions">
+                   </div>
+                   <div class="form-group">
+                       <label>{{ 'topics.addPartitions.form.brokers.label' | translate }}</label>
+                       <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" *ngFor="let broker of topic.brokers">
+                           <input class="custom-control-input" type="checkbox" id="broker-{{broker.id}}" [formControl]="partitionForm?.controls[broker.id]">
+                           <label for="broker-{{broker.id}}" class="custom-control-label">{{ broker.id }}</label>
+                       </div>
+                   </div>
+               </div>
+               <div class="card-footer">
+                   <div class="action-bar float-right">
+                       <button type="submit" class="btn btn-primary" [disabled]="!partitionForm.valid">{{ 'topics.addPartitions.form.buttons.save' | translate }}</button>
+                   </div>
+               </div>
+           </form>
+       </div>
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->

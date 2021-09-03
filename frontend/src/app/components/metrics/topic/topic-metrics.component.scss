@@ -1,0 +1,11 @@
+.nav-item {
+  a {
+    &.active {
+      background-color: #3c8dbc;
+      color: white;
+    }
+    &:not(.active) {
+      cursor: pointer;
+    }
+  }
+}

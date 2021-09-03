@@ -1,0 +1,28 @@
+.dropdown {
+  .nav-link {
+    cursor: pointer;
+  }
+}
+  
+.languages {
+  min-width: 50px;
+}
+
+.selected {
+  color: #16181b;
+  text-decoration: none;
+  background-color: #7b7d801f;
+}
+
+.selected:hover {
+  color: #16181b;
+  text-decoration: none;
+  background-color: #f8f9fa;
+}
+  
+.flag {
+  cursor: pointer;
+  width: 26px;
+  box-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23);
+  border-radius: 50%;
+}

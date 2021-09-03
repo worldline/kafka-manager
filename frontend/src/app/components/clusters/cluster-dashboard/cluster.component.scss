@@ -1,0 +1,21 @@
+.header-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+dl {
+    display: flex;
+    flex-wrap: wrap;
+  }
+dt {
+    width: 20%;
+}
+
+dd {
+    margin-left: auto;
+    width: 80%;
+}
+
+.card-indicator .card-body{
+    min-height: 200px;
+}

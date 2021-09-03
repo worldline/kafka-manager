@@ -1,0 +1,45 @@
+{
+    "breadcrumb": {
+        "home": "Accueil",
+        "dashboard": "Tableau de bord",
+        "brokers": {
+            "list": "Brokers",
+            "settings": "Edition Configuration"
+        },
+        "monitoring": "Monitoring",
+        "cluster": {
+            "home": "Cluster",
+            "detail": "Détail du cluster",
+            "add": "Création cluster"
+        },
+        "connect": {
+            "dashboard": "Connecteurs",
+            "add-connector": "Ajout d'un connecteur",
+            "edit-connector": "Edition du connecteur",
+            "connector-detail": "Connecteur"
+        },
+        "consumerGroups": {
+            "list": "Groupes de consommateurs",
+            "detail": "Groupe de consommateurs",
+            "reset": "Réinitialiser les offsets"
+        },
+        "topics": {
+            "detail": "Topic",
+            "list": "Topics",
+            "create": "Création",
+            "settings": "Edition Configuration",
+            "partitions": {
+                "add": "Création partition",
+                "reassign": "Edition partition"
+            },
+            "metrics": "Mesures",
+            "add": "Création topic"
+        },
+        "messages": {
+            "read": "Lire les messages"
+        },
+        "contacts": {
+            "list": "Contacts"
+        }
+    }
+}

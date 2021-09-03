@@ -1,0 +1,38 @@
+<ul>
+    <li *ngFor="let node of data | keyvalue: sortData; trackBy: identify">
+        <ng-container *ngIf="node.value && isObj(node.value);else valueTemplate">
+            <div class="complexeNode" [ngClass]="{'complexeNodeHover': displayMenuNode}">
+                <button class="btn btn-default btn-open" type="button" (click)="toggleOpen(node.key)" title="{{ (openStatus[node.key] ? 'messages.jsonViewer.close' : 'messages.jsonViewer.open') | translate }}">
+                    <i class="fas" [ngClass]="{'fa-caret-down': openStatus[node.key], 'fa-caret-right': !openStatus[node.key]}"></i>
+                </button>
+                <div class="nodeText">
+                    <span class="nodeKey nodeKeyAttribute">{{node.key}}</span>
+                    <span class="nodeKey nodeKeyAttribute nodeKeyNbSubNodes">&#123; {{nbSubNodes(node.value)}} &#125;</span>
+                </div>
+                <div *ngIf="displayMenuNode" class="menuButtons">
+                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" title="{{ 'messages.jsonViewer.select' | translate }}">
+                        <input class="custom-control-input" type="checkbox" id="json-{{node.key}}-{{currentId}}" (change)="selectAction(node.key, node.value, $event.currentTarget.checked)" [checked]="isSelected[node.key]">
+                        <label for="json-{{node.key}}-{{currentId}}" class="custom-control-label"></label>
+                    </div>
+                    <button class="btn btn-default btn-edit mr-2" type="button" hasRole="ADMIN" (click)="editAction(node.key, node.value)" title="{{ 'messages.jsonViewer.edit' | translate }}">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-default btn-clipboard" type="button" (click)="toClipboard(node.value)" title="{{ 'messages.jsonViewer.clipboard' | translate }}">
+                        <i class="far fa-clipboard"></i>
+                    </button>
+                </div>
+            </div>
+            <app-json-viewer-node
+                [data]="node.value"
+                [dateFormat]="dateFormat"
+                [ngClass]="{'d-none': !openStatus[node.key]}"
+                (open)="openAction(node.key, $event)">
+            </app-json-viewer-node>
+        </ng-container>
+        <ng-template #valueTemplate>
+            <span class="nodeKey nodeKeyValue">{{node.key}} : </span>
+            <span class="nodeValue" [ngClass]="{'nodeValueUpdated': isUpdated(node.key)}">{{node.value}}</span>
+            <span *ngIf="hasTransformValue(node.key, node.value)" class="nodeTransformValue">{{transformValue(node.key, node.value)}}</span>
+        </ng-template>
+    </li>
+</ul>

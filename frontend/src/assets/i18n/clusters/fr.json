@@ -1,0 +1,140 @@
+{
+    "clusters": {
+        "list": {
+            "title": "Clusters"
+        },
+        "timeline": {
+            "title": "Timeline"
+        },
+        "dropdown": {
+            "empty": "Aucun cluster selectionné",
+            "nbClusters": "{{nb}} clusters disponibles",
+            "add": "Ajouter un nouveau cluster",
+            "refresh": "Rafraichir la liste des clusters"
+        },
+        "messages": {
+            "selection": {
+                "title": "Choix du cluster",
+                "text": "Le cluster {{clusterName}} a été selectionné"
+            },
+            "refresh-list": {
+                "title": "Liste des clusters",
+                "text": "La liste des clusters a été rafraichi"
+            },
+            "error-refresh-list": {
+                "title": "Liste des clusters",
+                "text": "Erreur lors de la récupération de la liste des clusters"
+            },
+            "error-get-cluster-info": {
+                "title": "Informations sur le Cluster",
+                "text": "Erreur lors de la récupération des information du cluster"
+            },
+            "deletion": {
+                "title": "Suppression du cluster",
+                "text": "Le cluster a bien été supprimé"
+            }
+        },
+        "edit": {
+            "title": "Information du cluster",
+            "new": "Création d'un nouveau cluster",
+            "subtitle-edit": "Voir et éditer les information du cluster",
+            "subtitle-create": "Créer un cluster",
+            "form": {
+                "buttons": {
+                    "create": "Créer",
+                    "delete": "Supprimer",
+                    "update": "Modifier",
+                    "addServer": "Ajouter",
+                    "deleteServer": "Supprimer"
+                },
+                "name": {
+                    "label": "Nom",
+                    "placeholder": "Le nom du cluster"
+                },
+                "kafkaVersion": {
+                    "label": "Version",
+                    "placeholder": "La version de kafka (optionnel)"
+                },
+                "kafkaConnectAddr": {
+                    "label": "Adresse de kafka connect",
+                    "placeholder": "L'adresse de kafka connect (ex: http://localhost:8083)"
+                },
+                "zkAddr": {
+                    "label": "Adresse zookeeper",
+                    "placeholder": "L'adresse du zookeeper (ex: localhost:2181)"
+                },
+                "jmxPort": {
+                    "label": "Port JMX",
+                    "placeholder": "Port JMX (ex: 9093)"
+                },
+                "kafkaPort": {
+                    "label": "Port kafka",
+                    "placeholder": "Port kafka (ex: 9092)"
+                },
+                "brokerAddr": {
+                    "label": "Adresse du serveur",
+                    "placeholder": "Adresse du serveur (ex: localhost)"
+                },
+                "comment": {
+                    "label": "Commentaire",
+                    "placeholder": "Commentaire"
+                }
+            }
+        },
+        "home": {
+            "title": "Cluster"
+        },
+        "table": {
+            "columns": {
+                "name": "Nom",
+                "version": "Version",
+                "zkAddr": "Adresse du Zookeeper",
+                "brokerAddrs": "Adresse des brokers",
+                "jmxPort": "Port JMX",
+                "comment": "Commentaire",
+                "kafkaConnectAddr": "Adresse de kafka connect"
+            }
+        },
+        "available": {
+            "brokers": "Broker(s) disponible(s)",
+            "consumer-group": "Groupe(s) disponible(s)",
+            "topics": "Topic(s) disponible(s)"
+        },
+        "buttons": {
+            "edit": "Editer le cluster",
+            "brokerData": "Voir les informations des brokers",
+            "delete": "Supprimer le Cluster"
+        },
+        "modal": {
+            "delete": "Etes-vous sûr de vouloir supprimer ce cluster ?"
+        }
+    },
+    "timeline": {
+        "events": {
+            "LOGIN": "Connexion de l'utilisateur {{USER}}",
+            "CLUSTER_ADD": "Ajout d'un cluster {{CLUSTER}}",
+            "CLUSTER_EDIT": "Edition du cluster {{CLUSTER}}",
+            "CLUSTER_DELETE": "Suppression du cluster {{CLUSTER}}",
+            "BROKER_SETTINGS_UPDATE": "Mise à jour de la configuration du broker {{BROKER}}",
+            "TOPIC_DELETE": "Suppression du topic {{TOPIC}}",
+            "TOPIC_CREATE": "Ajout du topic {{TOPIC}}",
+            "TOPIC_SETTINGS_UPDATE": "Mise à jour de la configuration du topic {{TOPIC}}",
+            "TOPIC_ADD_PARTITIONS": "Ajout de {{NUMBER}} partitions sur le topic {{TOPIC}}",
+            "TOPIC_REASSIGN_PARTITIONS": "Réassignation des partitions sur le topic {{TOPIC}}",
+            "CONSUMER_GROUP_RESET_OFFSET": "Réinitialisation des offets pour le groupe {{CONSUMER_GROUP}}",
+            "CONSUMER_GROUP_DELETE": "Suppression du groupe de consommateur {{CONSUMER_GROUP}}",
+            "MONITORING_ACTIVITY": "Surveillance : Activité",
+            "MONITORING_LAG": "Surveillance : Lag",
+            "MONITORING_NB_SERVER": "Surveillance : Nombre de serveur",
+            "MONITORING_NO_ACTIVITY": "Surveillance : Pas d'activité",
+            "CONNECTOR_CREATE": "Ajout d'un connecteur {{CONNECTOR}}",
+            "CONNECTOR_UPDATE": "Edition d'un connecteur {{CONNECTOR}}",
+            "CONNECTOR_RESTART": "Redémarrage du connecteur {{CONNECTOR}}",
+            "CONNECTOR_RESUME": "Reprise du connector {{CONNECTOR}}",
+            "CONNECTOR_PAUSE": "Pause du connecteur {{CONNECTOR}}",
+            "CONNECTOR_DELETE": "Suppression du connecteur {{CONNECTOR}}",
+            "CONNECTOR_RESET_TOPICS": "Réinitialisation des topics sur {{CONNECTOR}}",
+            "CONNECTOR_TASK_RESTART": "Redémarrage de la tâche {{CONNECTOR_TASK}} sur {{CONNECTOR}}"
+        }
+    }
+}

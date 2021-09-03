@@ -1,0 +1,47 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'brokers.list' | translate }}</h3>
+            </div>
+            <div class="card-body p-0 table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>{{ 'brokers.table.columns.id' | translate }}</th>
+                            <th>{{ 'brokers.table.columns.server' | translate }}</th>
+                            <th>{{ 'brokers.table.columns.nbTopics' | translate }}</th>
+                            <th>{{ 'brokers.table.columns.nbPartitions' | translate }}</th>
+                            <th>{{ 'brokers.table.columns.leaders' | translate }}</th>
+                            <th>{{ 'brokers.table.columns.status' | translate }}</th>
+                            <th>{{ 'brokers.table.columns.actions' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let broker of brokers | paginate: pageable">
+                            <td>{{ broker.id }}</td>
+                            <td>
+                                <span *ngIf="broker.host">{{ broker.host }}:{{ broker.port }}</span>
+                            </td>
+                            <td>{{ broker.nbTopics }}</td>
+                            <td>{{ broker.nbPartitions }}</td>
+                            <td>
+                                {{ broker.nbLeaderPartitions ? broker.nbLeaderPartitions : 0 }}
+                                <span *ngIf="broker.nbLeaderPartitions">({{broker.nbLeaderPartitions/broker.nbPartitions*100}} %)</span>
+                            </td>
+                            <td><app-check [check]="broker.status === 'UP'"></app-check></td>
+                            <td class="cluster-actions">
+                                <a [routerLink]="['/clusters', cluster.id, 'brokers', broker.id]" title="{{ 'brokers.table.buttons.edit-settings' | translate }}">
+                                    <i class="fas fa-pencil-ruler text-primary"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls *ngIf="pageable.hasPagination" (pageChange)="pageChange($event)" class="pagination-selector"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</section>

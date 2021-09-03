@@ -1,0 +1,16 @@
+<div class="info-box bg-light">
+    <span class="info-box-icon" [ngClass]="cardIndicator.bgClass">
+        <i [ngClass]="cardIndicator.icon"></i>
+    </span>
+    <div class="info-box-content text">
+        <div class="info-box-text text-center text-muted">
+            <h3>{{ cardIndicator.title | translate }}</h3>
+            <p>{{ cardIndicator.subTitle | translate }}</p>
+        </div>
+    </div>
+    <div class="info-box-content gauge" *ngIf="cardIndicator.enableGauge">
+        <span class="info-box-number text-center text-muted mb-0">
+            <app-gauge [rotation]="cardIndicator.gaugeRotation" [color]="cardIndicator.gaugeColor" [width]="cardIndicator.gaugeSize" [background]="cardIndicator.gaugeBackground" [data]="cardIndicator.gaugeData"></app-gauge>
+        </span>
+    </div>
+</div>

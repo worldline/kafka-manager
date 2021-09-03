@@ -1,0 +1,19 @@
+<div class="modal fade" id="modal-danger" [ngClass]="displayModal ? 'show-dialog' : ''">
+    <div class="modal-dialog modal-{{size}}">
+        <div class="modal-content {{classType}}">
+            <div *ngIf="modalTitle" class="modal-header">
+                <h4 class="modal-title">{{ modalTitle | translate }}</h4>
+                <button type="button" class="close" (click)="toggleModalAction()" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ng-content></ng-content>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-outline-light" (click)="toggleModalAction()">{{ 'common.modal.cancel' | translate }}</button>
+                <button *ngIf="displayOkButton===true" type="button" class="btn btn-outline-light" (click)="executeAction()">{{ okButton | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>

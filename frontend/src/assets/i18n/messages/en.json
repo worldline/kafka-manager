@@ -1,0 +1,92 @@
+{
+    "messages": {
+        "title": "Read messages",
+        "list": "Message list",
+        "extras": "Extras",
+        "edit": "Edit message",
+        "information": "Messages' information",
+        "buttons": {
+            "select": "Read",
+            "setOffset": "Copy Offset",
+            "save": "Copy",
+            "editSave": "Update",
+            "reset": "Reset",
+            "cancel": "Cancel",
+            "refreshGroupId": "Update group ID"
+        },
+        "form": {
+            "topic": "Topic name",
+            "advancedFeatures": "Advanced features",
+            "topicOut": "Destination topic",
+            "commit": "Commit",
+            "numberOfMessages": "Number of messages to retrieve",
+            "offsetStart": "Starting offset",
+            "commitLabel": "Mark messages as read",
+            "groupId": "Group ID",
+            "fromGroupId": "Group to use as beginning offset",
+            "offset": {
+                "beginning": "Since beginning",
+                "from": "Since the existing group",
+                "add": "Add Offset"
+            },
+            "advancedMode": "Advanced mode"
+        },
+        "copyModal": {
+            "title": "Confirm the messages copy",
+            "text": "Do you want to copy the {{number}} message(s) ?"
+        },
+        "editMessage": {
+            "messages": {
+                "json": {
+                    "error": {
+                        "title": "Format",
+                        "text": "Message format is invalid"
+                    }
+                },
+                "topicSelect": {
+                    "error": {
+                        "title": "Destination topic",
+                        "text": "No destination topic has been selected"
+                    }
+                },
+                "select": {
+                    "error": {
+                        "title": "Selection",
+                        "text": "No message has been selected"
+                    }
+                },
+                "produce": {
+                    "success": {
+                        "title": "Messages copy",
+                        "text": "Messages have been copied"
+                    },
+                    "error": {
+                        "title": "Mmessages copy",
+                        "text": "Messages copy has failed"
+                    }
+                }
+            }
+        },
+        "jsonViewer": {
+            "closeAll": "Close all elements",
+            "openAll": "Open all elemnts",
+            "edit": "Edit message",
+            "clipboard": "Copy in clipboard",
+            "select": "Select the message",
+            "open": "Open element",
+            "close": "Close element",
+            "messages": {
+                "clipboard": {
+                    "success": {
+                        "title": "Clipboard",
+                        "text": "The element has been copied into the clipboard"
+                    },
+                    "error": {
+                        "title": "Clipboard",
+                        "text": "The copy into the clipboard has failed"
+                    }
+                }
+            }
+        }
+    }
+}

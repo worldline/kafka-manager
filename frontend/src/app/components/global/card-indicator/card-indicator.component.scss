@@ -1,0 +1,13 @@
+.info-box-icon {
+    min-width: 70px;
+}
+
+.info-box-content.text {
+    overflow: auto;
+}
+
+.info-box-content.gauge {
+    @media (min-width: 992px) and (max-width: 1199px) {
+        display: none;
+    }
+}

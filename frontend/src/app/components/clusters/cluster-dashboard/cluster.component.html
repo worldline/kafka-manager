@@ -1,0 +1,104 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body header-actions">
+                <div class="header-actions">
+                    <button type="button" class="btn btn-primary mr-2" *ngIf="settings?.enableDatabase" hasRole="ADMIN" [routerLink]="['/clusters', cluster.id, 'details']">
+                        <i class="fas fa-pencil-ruler"></i>
+                        {{ 'clusters.buttons.edit' | translate }}
+                    </button>
+
+                    <button type="button" class="btn btn-primary mr-2" [routerLink]="['/clusters', cluster.id, 'brokers']">
+                        <i class="fa fa-server"></i>
+                        {{ 'clusters.buttons.brokerData' | translate }}
+                    </button>
+
+                    <button *ngIf="settings?.enableDatabase" hasRole="ADMIN" type="button" class="btn btn-danger" (click)="deleteModalState=true">
+                        <i class="fas fa-trash-alt"></i>
+                        {{ 'clusters.buttons.delete' | translate }}
+                    </button>
+                    <app-modal classType="bg-danger" (execute)="deleteCluster()" (toggleModal)="deleteModalState=$event" modalTitle="topics.details.buttons.delete" [displayModal]="deleteModalState">
+                        <p>{{ 'clusters.modal.delete' | translate }}</p>
+                    </app-modal>
+                </div>
+            </div>
+        </div>
+        <!-- Main content -->
+    </div>
+    <!-- Main row -->
+</section>
+<!-- /.content -->
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card card-dark card-indicator">
+                    <div class="card-header">
+                        <h2 class="card-title">{{ 'topics.details.label.keyData' | translate }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <ngx-spinner [name]="cardIndicatorSpinnerId" [fullScreen]="false" type="ball-spin-clockwise" size="medium"></ngx-spinner>
+                            <div class="col-12" *ngFor="let cardIndicator of cardIndicators">
+                                <app-card-indicator [cardIndicator]="cardIndicator"></app-card-indicator>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card card-dark">
+                    <div class="card-header">
+                        <h2 class="card-title">{{ 'topics.details.label.summary' | translate }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <dl>
+                            <dt>{{ 'clusters.table.columns.name' | translate }}</dt>
+                            <dd>{{ cluster.name }}</dd>
+
+                            <dt>{{ 'clusters.table.columns.version' | translate }}</dt>
+                            <dd>v{{ cluster.kafkaVersion }}</dd>
+
+                            <dt>{{ 'clusters.table.columns.zkAddr' | translate }}</dt>
+                            <dd>{{ cluster.zkAddr }}</dd>
+
+                            <dt *ngIf="settings?.enableKafkaConnect">{{ 'clusters.table.columns.kafkaConnectAddr' | translate }}</dt>
+                            <dd *ngIf="settings?.enableKafkaConnect">{{ cluster.kafkaConnectAddr }}</dd>
+
+                            <dt>{{ 'clusters.table.columns.brokerAddrs' | translate }}</dt>
+                            <dd>
+                                <ul>
+                                    <li *ngFor="let addr of cluster.brokerAddrs">
+                                        {{ addr.address }} : {{ addr.kafkaPort }}<span *ngIf="addr.jmxPort"> ({{ 'clusters.table.columns.jmxPort' | translate }} : {{addr.jmxPort}})</span>
+                                    </li>
+                                </ul>
+                            </dd>
+
+                            <dt>{{ 'clusters.table.columns.comment' | translate }}</dt>
+                            <dd>{{ cluster.comment }}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content" *ngIf="events && events.length > 0">
+    <div class="container-fluid">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h2 class="card-title">{{ 'clusters.timeline.title' | translate }}</h2>
+            </div>
+            <div class="card-body">
+                <app-time-line [data]="events"></app-time-line>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-topics-metrics *ngIf="settings?.enableMetrics"></app-topics-metrics>

@@ -1,0 +1,38 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body text-right">
+                <button type="button" class="btn btn-primary" hasRole="ADMIN" (click)="goToCreateTopic()">{{ 'topics.list.buttons.create' | translate }}</button>
+            </div>
+        </div>
+        <div class="card card-dark">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'topics.list.table.title' | translate }}</h3>
+            </div>
+            <div class="card-body p-0 table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>{{ 'topics.list.table.columns.name' | translate }}</th>
+                        <th>{{ 'topics.list.table.columns.nbPartitions' | translate }}</th>
+                        <th>{{ 'topics.list.table.columns.replicationFactor' | translate }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let topic of topics | paginate: pageable">
+                        <td><a [routerLink]="topic.name">{{ topic.name }}</a></td>
+                        <td>{{ topic.nbPartitions }}</td>
+                        <td>{{ topic.nbReplications }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <pagination-controls *ngIf="pageable.hasPagination" (pageChange)="pageChange($event)" class="my-pagination"></pagination-controls>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->

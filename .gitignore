@@ -1,0 +1,69 @@
+
+
+#############################
+# IDEs and editors
+#############################
+.idea/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+.c9/
+*.launch
+*.sublime-workspace
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+
+#############################
+# MAVEN
+#############################
+
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+#############################
+# Front
+#############################
+
+# compiled output
+/frontend/dist
+/frontend/tmp
+/frontend/out-tsc
+# Only exists if Bazel was run
+/frontend/bazel-out
+
+# dependencies
+/frontend/node_modules
+
+# misc
+/frontend/.sass-cache
+/frontend/connect.lock
+/frontend/coverage
+/frontend/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/frontend/typings
+
+#############################
+# System Files
+#############################
+.DS_Store
+Thumbs.db

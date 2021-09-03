@@ -1,0 +1,10 @@
+.textPart {
+  width: 100%;
+  height: 200px;
+}
+
+.maximized-card {
+  & .textPart {
+    height: 100%;
+  }
+}

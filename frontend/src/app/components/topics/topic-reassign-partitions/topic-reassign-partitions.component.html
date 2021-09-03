@@ -1,0 +1,39 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <div class="card card-primary">
+            <form role="form" [formGroup]="partitionForm" (ngSubmit)="onSubmit()">
+                <div class="card-body p-0 table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{{ 'topics.reassignPartitions.form.table.columns.partition' | translate }}</th>
+                                <th>{{ 'topics.reassignPartitions.form.table.columns.replicas.label' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let partition of topic.partitions">
+                                <td>{{ partition.partition }}</td>
+                                <td>
+                                    <div class="form-group">
+                                        <ng-select appearance="outline" [multiple]="true" formControlName="replicas-{{partition.partition}}">
+                                            <ng-option [value]="brokerId" *ngFor="let brokerId of brokerIds">{{brokerId}}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                   <div class="action-bar float-right">
+                       <button type="submit" class="btn btn-primary" [disabled]="!partitionForm.valid">{{ 'topics.addPartitions.form.buttons.save' | translate }}</button>
+                   </div>
+               </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->

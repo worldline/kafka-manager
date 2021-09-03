@@ -1,0 +1,62 @@
+<!-- Main content -->
+<section class="content" *ngIf="clusters && clusters.length > 0">
+    <div class="container-fluid">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'dashboard.clusters.list' | translate }}</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0 table-responsive">
+                <table id="cluster-table" class="table table-hover table-striped dataTable" role="grid" aria-describedby="cluster-table_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="1" aria-controls="cluster-table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column ascending">{{ 'dashboard.clusters.table.columns.name' | translate }}</th>
+                            <th class="sorting" tabindex="2" aria-controls="cluster-table" rowspan="1" colspan="1" aria-label="zkAddr: activate to sort column ascending">{{ 'dashboard.clusters.table.columns.zkAddr' | translate }}</th>
+                            <th class="sorting" tabindex="7" aria-controls="cluster-table" rowspan="1" colspan="1" aria-label="brokerAddrs: activate to sort column ascending">{{ 'dashboard.clusters.table.columns.brokerAddrs' | translate }}</th>
+                            <th class="sorting" tabindex="6" aria-controls="cluster-table" rowspan="1" colspan="1" aria-label="jmxPort: activate to sort column ascending">{{ 'dashboard.clusters.table.columns.jmxPort' | translate }}</th>
+                            <th class="sorting" tabindex="4" aria-controls="cluster-table" rowspan="1" colspan="1" aria-label="comment: activate to sort column ascending">{{ 'dashboard.clusters.table.columns.comment' | translate }}</th>
+                            <th class="sorting" tabindex="8" aria-controls="cluster-table" rowspan="1" colspan="1">{{ 'dashboard.clusters.table.columns.actions' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr role="row" class="odd" *ngFor="let cluster of clusters" >
+                            <td class="sorting_1">{{ cluster.name }} (v{{ cluster.kafkaVersion }})</td>
+                            <td>{{ cluster.zkAddr }}</td>
+                            <td>
+                                <ul>
+                                    <li *ngFor="let addr of cluster.brokerAddrs">
+                                        {{ addr.address }} : {{ addr.kafkaPort }}
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li *ngFor="let addr of cluster.brokerAddrs">
+                                        {{ addr.address }} : {{ addr.jmxPort }}
+                                    </li>
+                                </ul>
+                            </td>
+                            <td class="comment-field">{{ cluster.comment }}</td>
+                            <td class="cluster-actions">
+                                <a (click)="onSelectCluster(cluster)" title="{{ 'dashboard.clusters.table.buttons.view' | translate }}">
+                                    <i class="fa fa-plug text-primary"></i>
+                                </a>
+                                <a [routerLink]="['/clusters', cluster.id, 'details']" title="{{ 'dashboard.clusters.table.buttons.edit' | translate }}">
+                                    <i class="fas fa-pencil-ruler text-primary"></i>
+                                </a>
+                                <a [routerLink]="['/clusters', cluster.id, 'brokers']" title="{{ 'dashboard.clusters.table.buttons.brokerData' | translate }}">
+                                    <i class="fa fa-server text-primary"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <div class="action-bar">
+                    <button *ngIf="settings?.enableDatabase" type="button" class="btn btn-block btn-info" routerLink="/add-cluster"><i class="fa fa-plus"></i> {{ 'dashboard.clusters.buttons.add' | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

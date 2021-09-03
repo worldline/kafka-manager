@@ -1,0 +1,75 @@
+<!-- Main content -->
+<section class="content">
+  <!-- Default box -->
+  <div class="container-fluid">
+    <div class="card card-dark">
+      <div class="card-header">
+        <h3 class="card-title">{{ cluster?.id ? ('clusters.edit.subtitle-edit' | translate) : ('clusters.edit.subtitle-create' | translate) }}</h3>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+      <form role="form" [formGroup]="clusterForm" (ngSubmit)="onSubmit()">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="cluster-name">{{ 'clusters.edit.form.name.label' | translate }}</label>
+            <input type="text" class="form-control" id="cluster-name" placeholder="{{ 'clusters.edit.form.name.placeholder' | translate }}" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label for="cluster-kafka-version">{{ 'clusters.edit.form.kafkaVersion.label' | translate }}</label>
+            <input type="text" class="form-control" id="cluster-kafka-version" placeholder="{{ 'clusters.edit.form.kafkaVersion.placeholder' | translate }}" formControlName="kafkaVersion">
+          </div>
+          <div class="form-group">
+            <label for="cluster-zk-addr">{{ 'clusters.edit.form.zkAddr.label' | translate }}</label>
+            <input type="text" class="form-control" id="cluster-zk-addr" placeholder="{{ 'clusters.edit.form.zkAddr.placeholder' | translate }}" formControlName="zkAddr">
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <label>{{ 'clusters.edit.form.brokerAddr.label' | translate }}</label>
+            </div>
+            <div class="col-md-4">
+              <label>{{ 'clusters.edit.form.kafkaPort.label' | translate }}</label>
+            </div>
+            <div class="col-md-4">
+              <label>{{ 'clusters.edit.form.jmxPort.label' | translate }}</label>
+            </div>
+          </div>
+          <div class="row form-group" *ngFor="let addr of clusterAddress; let isFirst = first;">
+            <div class="col-md-4">
+              <input type="text" class="form-control" placeholder="{{ 'clusters.edit.form.brokerAddr.placeholder' | translate }}" formControlName="server-{{addr.id}}">
+            </div>
+            <div class="col-md-4">
+              <input type="number" class="form-control" placeholder="{{ 'clusters.edit.form.kafkaPort.placeholder' | translate }}" formControlName="kafka-{{addr.id}}">
+            </div>
+            <div class="col-md-4 jmx-field">
+              <input type="number" class="form-control" placeholder="{{ 'clusters.edit.form.jmxPort.placeholder' | translate }}" formControlName="jmx-{{addr.id}}">
+              <button *ngIf="!isFirst" type="button" class="btn btn-default" (click)="removeAddress(addr.id)" title="{{ 'clusters.edit.form.buttons.deleteServer' | translate }}"><i class="fas fa-minus"></i></button>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-12 button-add-address">
+              <button type="button" class="btn btn-default" (click)="addAddress()" title="{{ 'clusters.edit.form.buttons.addServer' | translate }}"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="settings?.enableKafkaConnect">
+            <label for="cluster-kafka-connect-addr">{{ 'clusters.edit.form.kafkaConnectAddr.label' | translate }}</label>
+            <input type="text" class="form-control" id="cluster-kafka-connect-addr" placeholder="{{ 'clusters.edit.form.kafkaConnectAddr.placeholder' | translate }}" formControlName="kafkaConnectAddr">
+          </div>
+          <div class="form-group">
+            <label>{{ 'clusters.edit.form.comment.label' | translate }}</label>
+            <textarea class="form-control" rows="3" placeholder="{{ 'clusters.edit.form.comment.placeholder' | translate }}" formControlName="comment">{{ cluster?.comment }}</textarea>
+          </div>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+          <div class="action-bar float-right">
+            <button type="submit" class="btn btn-primary" [disabled]="!clusterForm.valid">{{ cluster?.id ? ('clusters.edit.form.buttons.update' | translate) : ('clusters.edit.form.buttons.create' | translate) }}</button>
+            <button *ngIf="cluster" type="button" class="btn btn-danger" (click)="onDelete()" [disabled]="!clusterForm.valid">{{ 'clusters.edit.form.buttons.delete' | translate }}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- /.card -->
+</section>
+<!-- /.content -->

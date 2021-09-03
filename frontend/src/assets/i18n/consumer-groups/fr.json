@@ -1,0 +1,110 @@
+{
+  "consumerGroups": {
+    "reset": {
+      "title": "Réinitialiser les offsets du groupe",
+      "messages": {
+          "success": {
+              "title": "Réinitialisation des offets",
+              "text": "Les offsets du groupe {{groupId}} ont été réinitialisés"
+          },
+          "error": {
+              "title": "Réinitialisation des offets",
+              "text": "La réinitialisation des offsets du groupe a échouée. Pour se faire, aucune consumer de ce groupe ne doit être démarré."
+          },
+          "unmodify": {
+              "title": "Réinitialisation des offets",
+              "text": "Au moins un offset doit être modifié"
+          }
+      },
+      "form": {
+        "buttons": {
+          "save": "Réinitialiser"
+        },
+        "table": {
+          "columns": {
+            "topic": "Topic",
+            "partition": "# Partition",
+            "offset": "Offset"
+          }
+        }
+      }
+    },
+    "detail": {
+      "title": "Information sur le groupe de consommateur",
+      "lag": "Lag total",
+      "coordinator": "Coordinateur",
+      "operatingState": "Etat de fonctionnement",
+      "partitionAssignor": "Assignateur de partition",
+      "type": "Type du groupe de consommateur",
+      "simpleConsumerGroup": {
+        "label": "Type de Consommateur",
+        "simple": "Simple",
+        "highLevel": "Haut Niveau"
+      },
+      "buttons": {
+        "delete": "Supprimer le groupe",
+        "resetOffset": "Réinitialiser les offsets"
+      },
+      "delete": {
+          "messages": {
+              "success": {
+                  "title": "Suppression du groupe",
+                  "text": "Le groupe {{groupId}} a été supprimé"
+              },
+              "error": {
+                  "title": "Suppression du groupe",
+                  "text": "La suppression du groupe a échouée"
+              }
+          }
+      },
+      "modal": {
+          "delete-content": "Etes-vous sûr de vouloir supprimer ce topic ?"
+      },
+      "info": {
+        "title": "Information",
+        "partitionAssignor": "",
+        "state": "",
+        "simpleConsumerGroup": ""
+      }
+    },
+    "list": {
+      "title": "Groupes de consommateurs",
+      "table": {
+        "title": "Groupes disponibles",
+        "columns": {
+          "groupId": "Nom du groupe",
+          "topics": "Topics",
+          "lags": "Lags",
+          "simpleConsumerGroup": {
+            "label": "Type de Consommateur",
+            "simple": "Simple",
+            "highLevel": "High Level"
+          },
+          "state": {
+            "label": "Statut",
+            "unknown": "Inconnu"
+          }
+        }
+      }
+    }
+  },
+  "consumer": {
+    "list": {
+      "title": "Liste des consommateurs",
+      "table": {
+        "columns": {
+          "partitionId": "# de partition",
+          "host": "Serveur",
+          "topic": "Topic",
+          "id": "ID du consumer",
+          "consumerGroup": "Groupe de consommateur",
+          "lag": "Lag",
+          "offsets": {
+            "current": "Offset courant",
+            "end": "Dernier offset"
+          }
+        }
+      }
+    }
+  }
+}

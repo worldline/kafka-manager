@@ -1,0 +1,20 @@
+.info-box-title {
+    display: block;
+    margin-top: .25rem;
+    margin-bottom: .50rem;
+    font-weight: 700;
+}
+
+.info-box-detail {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: .50rem;
+    font-style: oblique;
+}
+
+
+.small-box-broker {
+    margin-bottom: 0px !important;
+}

@@ -1,0 +1,53 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <div class="card card-primary">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>{{ 'consumerGroups.reset.form.table.columns.topic' | translate }}</label>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <ng-select appearance="outline" (change)="selectTopic($event)">
+                                <ng-option [value]="topic.name" *ngFor="let topic of topics">{{topic.name}}</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-primary" *ngIf="selectedTopic">
+            <form role="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="card-body p-0 table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{{ 'consumerGroups.reset.form.table.columns.partition' | translate }}</th>
+                                <th>{{ 'consumerGroups.reset.form.table.columns.offset' | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           <tr *ngFor="let partition of selectedTopic.partitions">
+                                <td>{{ partition.partition }}</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" id="partition-{{partition.partition}}" formControlName="partition-{{partition.partition}}">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                   <div class="action-bar float-right">
+                       <button type="submit" class="btn btn-primary" [disabled]="!form.valid">{{ 'consumerGroups.reset.form.buttons.save' | translate }}</button>
+                   </div>
+               </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->

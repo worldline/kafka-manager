@@ -1,0 +1,180 @@
+{
+  "connect": {
+    "edit-connector": {
+      "title": "Edition du connecteur {{connectorName}}"
+    },
+    "add-connector": {
+      "title": "Ajout d'un connecteur",
+      "form": {
+        "name": {
+          "label": "Nom",
+          "placeholder": "Nom"
+        },
+        "topic": {
+          "label": "Topic",
+          "placeholder": "Topic"
+        },
+        "configKey": {
+          "label": "Configuration",
+          "placeholder": "Configuration"
+        },
+        "configValue": {
+          "label": "Valeur",
+          "placeholder": "Valeur"
+        },
+        "type": "Type",
+        "plugin": "Plugin",
+        "buttons": {
+          "save": "Ajouter",
+          "edit": "Editer",
+          "deleteConfig": "Supprimer la configuration",
+          "addConfig": "Ajout d'une configuration"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": {
+            "title": "Création du connecteur",
+            "text": "Le connecteur {{connectorName}} a été créé"
+          },
+          "error": {
+              "title": "Création du connecteur",
+              "text": "La création du connecteur à échouée"
+          }
+        },
+        "edit": {
+          "success": {
+            "title": "Edition du connecteur",
+            "text": "Le connecteur {{connectorName}} a été modifié"
+          },
+          "error": {
+              "title": "Edition du connecteur",
+              "text": "La modification du connecteur à échouée"
+          }
+        }
+      }
+    },
+    "connector-detail": {
+      "title": "Information du connector : {{connectorName}}"
+    },
+    "dashboard": {
+      "title": "Tableau de bord",
+      "topology": "Topologie",
+      "label": {
+        "keyData": "Indicateurs"
+      },
+      "indicators": {
+        "sinkConnectors": "Connecteurs de destination",
+        "sourceConnectors": "Connecteurs source",
+        "topics": "Topics utilisés par les connecteurs"
+      },
+      "messages": {
+        "error": {
+          "title": "Kafka connect",
+          "text": "Impossible de se connecter à kafka connect"
+        }
+      }
+    },
+    "connector": {
+      "modal": {
+        "delete-content": "Etes-vous sûr de vouloir supprimer ce connector ?"
+      },
+      "buttons": {
+        "resume": "Reprendre",
+        "pause": "Mettre en pause",
+        "restart": "Redémarrer",
+        "delete": "Supprimer",
+        "edit": "Edition"
+      },
+      "label": {
+        "keyData": "Données importantes",
+        "summary": "Résumé",
+        "configuration": "Configuration"
+      },
+      "indicators": {
+        "status": "Statut"
+      },
+      "task": {
+        "table": {
+          "columns": {
+            "id": "ID",
+            "status": "Statut",
+            "worker": "Worker",
+            "actions": "Actions",
+            "trace": "Trace de l'erreur"
+          }
+        }
+      },
+      "type": "Type",
+      "class": "Classe",
+      "topic": "Topic",
+      "messages": {
+        "resume": {
+          "success": {
+            "title": "Reprendre le connecteur",
+            "text": "Le connecteur {{connectorName}} a été relancé"
+          },
+          "error": {
+            "title": "Reprendre le connecteur",
+            "text": "La relance du connecteur {{connectorName}} a échouée"
+          }
+        },
+        "pause": {
+          "success": {
+            "title": "Mettre en pause le connecteur",
+            "text": "Le connecteur {{connectorName}} a été mis en pause"
+          },
+          "error": {
+            "title": "Mettre en pause le connecteur",
+            "text": "La mise en pause du connecteur {{connectorName}} a échouée"
+          }
+        },
+        "restart": {
+          "success": {
+            "title": "Redémarrer le connecteur",
+            "text": "Le connecteur {{connectorName}} a redémarré"
+          },
+          "error": {
+            "title": "Redémarrer le connecteur",
+            "text": "Le redémarrage du connecteur {{connectorName}} a échoué"
+          }
+        },
+        "restartTask": {
+          "success": {
+            "title": "Redémarrer la tâche",
+            "text": "La tâche a redémarrée"
+          },
+          "error": {
+            "title": "Redémarrer la tâche",
+            "text": "Le redémarrage de la tâche a échoué"
+          }
+        },
+        "delete": {
+          "success": {
+            "title": "Supprimer le connecteur",
+            "text": "Le connecteur {{connectorName}} a supprimé"
+          },
+          "error": {
+            "title": "Supprimer le connecteur",
+            "text": "La suppression du connecteur {{connectorName}} a échouée"
+          }
+        }
+      }
+    },
+    "connectors": {
+      "list": "Liste des connecteurs",
+      "tasks": "Liste des tâches",
+      "buttons": {
+        "create": "Créé un connecteur"
+      },
+      "table": {
+        "columns": {
+          "name": "Nom",
+          "type": "Type",
+          "topic": "Topic",
+          "status": "Statut"
+        }
+      }
+    }
+  }
+}

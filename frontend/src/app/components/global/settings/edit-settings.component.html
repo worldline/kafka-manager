@@ -1,0 +1,52 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h3 class="card-title">{{resourceId}}</h3>
+            </div>
+            <div class="card-body p-0 table-responsive">
+                <form role="form" [formGroup]="settingForm" (ngSubmit)="onSubmit()">
+                    <div class="card-body">
+                        <ng-container *ngFor="let setting of settingList; let index = index">
+                            <div class="form-group">
+                                <div class="settings-title">
+                                    <label for="setting-{{setting}}">{{ intlPrefix + '.' + intlKey(setting) + '.name' | translate }}</label>
+                                    <span *ngIf="this.settings[setting]?.mode" class="settings-mode">{{this.settings[setting]?.mode}}</span>
+                                </div>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <ng-container *ngIf="getFormType(setting) === 'boolean'">
+                                        <ng-select class="settings-select" [readonly]="this.settings[setting]?.readOnly" formControlName="{{setting}}" labelForId="setting-{{setting}}" id="setting-{{setting}}">
+                                            <ng-option value="true">true</ng-option>
+                                            <ng-option value="false">false</ng-option>
+                                        </ng-select>
+                                    </ng-container>
+                                    <ng-container *ngIf="getFormType(setting) === 'values'">
+                                        <ng-select class="settings-select" [readonly]="this.settings[setting]?.readOnly" formControlName="{{setting}}" labelForId="setting-{{setting}}" id="setting-{{setting}}">
+                                            <ng-option [value]="value" *ngFor="let value of this.settings[setting]?.values">{{value}}</ng-option>
+                                        </ng-select>
+                                    </ng-container>
+                                    <ng-container *ngIf="getFormType(setting) === 'default'">
+                                        <input [type]="getInputType(setting)" class="form-control" id="setting-{{setting}}" formControlName="{{setting}}">
+                                    </ng-container>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text" [disabled]="this.settings[setting]?.readOnly" [ngClass]="{'settings-not-default':isNotDefault(setting)}" title="{{ 'settings-edit.default-value' | translate }}">{{this.settings[setting]?.default}}</div>
+                                    </div>
+                                </div>
+                                <span class="settings-description">{{ intlPrefix + '.' + intlKey(setting) + '.description' | translate }}</span>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="card-footer">
+                        <div class="action-bar float-right">
+                            <button type="submit" class="btn btn-primary" [disabled]="!settingForm.valid">{{ 'settings-edit.buttons.update' | translate }}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->

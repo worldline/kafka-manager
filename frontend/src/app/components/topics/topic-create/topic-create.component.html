@@ -1,0 +1,39 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+       <div class="card card-primary">
+           <form role="form" [formGroup]="topicForm" (ngSubmit)="onSubmit()">
+               <div class="card-body">
+                   <div class="form-group">
+                       <label for="topic-name">{{ 'topics.create.form.name.label' | translate }}</label>
+                       <input type="text" class="form-control" id="topic-name" placeholder="{{ 'topics.create.form.name.placeholder' | translate }}" formControlName="name">
+                   </div>
+                   <div class="form-group">
+                       <label for="topic-nb-partitions">{{ 'topics.create.form.nbPartitions.label' | translate }}</label>
+                       <input type="number" class="form-control" id="topic-nb-partitions" placeholder="{{ 'topics.create.form.nbPartitions.placeholder' | translate }}" formControlName="nbPartitions">
+                   </div>
+                   <div class="form-group">
+                       <label for="topic-replication-factor">{{ 'topics.create.form.replicationFactor.label' | translate }}</label>
+                       <input type="number" class="form-control" id="topic-replication-factor" placeholder="{{ 'topics.create.form.replicationFactor.placeholder' | translate }}" formControlName="replicationFactor">
+                   </div>
+                   <div class="form-group">
+                       <label for="topic-retention-time">{{ 'topics.create.form.retentionTime.label' | translate }}</label>
+                       <input type="number" class="form-control" id="topic-retention-time" placeholder="{{ 'topics.create.form.retentionTime.placeholder' | translate }}" formControlName="retentionTime">
+                   </div>
+                   <div class="form-group">
+                       <label for="topic-retention-bytes">{{ 'topics.create.form.retentionBytes.label' | translate }}</label>
+                       <input type="number" class="form-control" id="topic-retention-bytes" placeholder="{{ 'topics.create.form.retentionBytes.placeholder' | translate }}" formControlName="retentionBytes">
+                   </div>
+               </div>
+               <div class="card-footer">
+                   <div class="action-bar float-right">
+                       <button type="submit" class="btn btn-primary" [disabled]="!topicForm.valid">{{ 'topics.create.form.buttons.save' | translate }}</button>
+                   </div>
+               </div>
+           </form>
+       </div>
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->

@@ -1,0 +1,19 @@
+<div class="json-viewer">
+    <div class="json-header">
+        <button class="btn btn-default" type="button" (click)="child.closeAll()" title="{{ 'messages.jsonViewer.closeAll' | translate }}">
+            <i class="fas fa-compress-arrows-alt"></i>
+        </button>
+        <button class="btn btn-default" type="button" (click)="child.openAll()" title="{{ 'messages.jsonViewer.openAll' | translate }}">
+            <i class="fas fa-expand-arrows-alt"></i>
+        </button>
+    </div>
+    <div class="json-content">
+        <app-json-viewer-node
+            [data]="data"
+            [dateFormat]="dateFormat"
+            displayMenuNode="true"
+            (select)="select.emit($event)"
+            (edit)="edit.emit($event)">
+        </app-json-viewer-node>
+    </div>
+</div>

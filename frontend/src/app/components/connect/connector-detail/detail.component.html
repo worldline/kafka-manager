@@ -1,0 +1,112 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <div class="card" hasRole="ADMIN">
+            <div class="card-body text-right">
+                <button type="button" class="btn btn-primary mr-2" hasRole="ADMIN" (click)="goToEditConnector()">{{ 'connect.connector.buttons.edit' | translate }}</button>
+                <button *ngIf="connector.connector['state'] === 'RUNNING'" type="button" class="btn btn-primary mr-2" hasRole="ADMIN" (click)="pauseConnector()">{{ 'connect.connector.buttons.pause' | translate }}</button>
+                <button *ngIf="connector.connector['state'] === 'PAUSED'" type="button" class="btn btn-primary mr-2" hasRole="ADMIN" (click)="resumeConnector()">{{ 'connect.connector.buttons.resume' | translate }}</button>
+                <button type="button" class="btn btn-primary mr-2" hasRole="ADMIN" (click)="restartConnector()">{{ 'connect.connector.buttons.restart' | translate }}</button>
+                <button type="button" class="btn btn-danger" hasRole="ADMIN" (click)="deleteModalState=true">{{ 'connect.connector.buttons.delete' | translate }}</button>
+                <app-modal classType="bg-danger" (execute)="deleteConnector()" (toggleModal)="deleteModalState=$event" modalTitle="connect.connector.buttons.delete" [displayModal]="deleteModalState">
+                    <p>{{ 'connect.connector.modal.delete-content' | translate }}</p>
+                </app-modal>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card card-dark">
+                    <div class="card-header">
+                        <h2 class="card-title">{{ 'connect.connector.label.keyData' | translate }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12" >
+                                <app-card-indicator [cardIndicator]="cardIndicator"></app-card-indicator>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card card-dark summary">
+                    <div class="card-header">
+                        <h2 class="card-title">{{ 'connect.connector.label.summary' | translate }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <dl>
+                            <dt>{{ 'connect.connector.type' | translate }}</dt>
+                            <dd>{{ connector.type | titlecase }}</dd>
+
+                            <dt>{{ 'connect.connector.class' | translate }}</dt>
+                            <dd>{{ connector.config['connector.class'] | titlecase }}</dd>
+
+                            <dt>{{ 'connect.connector.topic' | translate }}</dt>
+                            <dd><a [routerLink]="[routeToTopic,connector.config['topic'] || connector.config['topics']]">{{ connector.config['topic'] || connector.config['topics'] | titlecase }}</a></dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main content -->
+    </div>
+    <!-- Main row -->
+</section>
+
+<section>
+    <div class="container-fluid">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h2 class="card-title">{{ 'connect.connector.label.configuration' | translate }}</h2>
+            </div>
+            <div class="card-body">
+                <dl class="configuration">
+                    <ng-container *ngFor="let item of connector.config | keyvalue">
+                        <dt>{{ item.key }}</dt>
+                        <dd>{{ item.value }}</dd>
+                    </ng-container>
+                </dl>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section *ngIf="connector?.tasks?.length > 0">
+    <div class="container-fluid">
+        <div class="card card-dark card-indicator">
+            <div class="card-header">
+                <h2 class="card-title">{{ 'connect.connectors.tasks' | translate }}</h2>
+            </div>
+            <div class="card-body p-0 table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>{{ 'connect.connector.task.table.columns.id' | translate }}</th>
+                            <th>{{ 'connect.connector.task.table.columns.status' | translate }}</th>
+                            <th>{{ 'connect.connector.task.table.columns.worker' | translate }}</th>
+                            <th>{{ 'connect.connector.task.table.columns.actions' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let task of connector.tasks">
+                            <td>{{ task.id }}</td>
+                            <td>
+                                <app-check [check]="task.state === 'RUNNING'"></app-check>
+                                <i *ngIf="task.trace" class="far fa-eye text-primary see-detail" role="button" (click)="showTrace(task)"></i>
+                            </td>
+                            <td>{{ task.worker_id }}</td>
+                            <td class="task-actions">
+                                <i class="fas fa-recycle text-primary restartTask" role="button" (click)="restartTask(task.id)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <app-modal classType="bg-info" size="lg" displayOkButton=false (toggleModal)="traceModalState=$event" modalTitle="connect.connector.task.table.columns.trace" [displayModal]="traceModalState">
+                    <p>{{selectedTask?.trace}}</p>
+                </app-modal>
+            </div>
+        </div>
+    </div>
+</section>

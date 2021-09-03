@@ -1,0 +1,30 @@
+.action-bar {
+  button {
+    margin-left: 10px;
+  }
+}
+
+.button-add-configuration {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.value-field {
+  display: flex;
+}
+
+.config-select {
+  flex-grow: 1;
+}
+
+.ng-select.config-select ::ng-deep .ng-select-container {
+    height: 41px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.config-description {
+  font-size: 80%;
+  font-weight: 400;
+  margin-top: 5px;
+}

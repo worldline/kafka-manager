@@ -1,0 +1,105 @@
+{
+  "consumerGroups": {
+    "reset": {
+      "title": "Reset the group's offsets",
+      "messages": {
+          "success": {
+              "title": "Reset offets",
+              "text": "The group's offsets {{groupId}} have been reset"
+          },
+          "error": {
+              "title": "Reset offets",
+              "text": "The group's offsets reset failed. No consumer related to this group must be started."
+          },
+          "unmodify": {
+              "title": "Reset offets",
+              "text": "At least one offset must be modified"
+          }
+      },
+      "form": {
+        "buttons": {
+          "save": "Reset"
+        },
+        "table": {
+          "columns": {
+            "topic": "Topic",
+            "partition": "# Partition",
+            "offset": "Offset"
+          }
+        }
+      }
+    },
+    "detail": {
+      "title": "Consumer group information",
+      "lag":  "Overall lag",
+      "coordinator": "Coordinator",
+      "operatingState": "Operating state",
+      "partitionAssignor": "Partition assignor",
+      "type": "consumer group type",
+      "simpleConsumerGroup": {
+        "label": "Consumer Type",
+        "simple": "Simple",
+        "highLevel": "High Level"
+      },
+      "buttons": {
+        "delete": "Remove group",
+        "resetOffset": "Reset offsets"
+      },
+      "delete": {
+          "messages": {
+              "success": {
+                  "title": "Group deletion",
+                  "text": "The group {{groupId}} has been removed"
+              },
+              "error": {
+                  "title": "Group deletion",
+                  "text": "The group deletion has failed"
+              }
+          }
+      },
+      "modal": {
+          "delete-content": "Are you sure you want to delete this topic?"
+      },
+      "info": {
+        "title": "Information",
+        "partitionAssignor": "",
+        "state": "",
+        "simpleConsumerGroup": ""
+      }
+    },
+    "list": {
+      "title": "Consumer groups",
+      "table": {
+        "title": "Available groups",
+        "columns": {
+          "groupId": "Group name",
+          "topics": "Topics",
+          "lags": "Lags",
+          "state": {
+            "label": "Status",
+            "unknown": "Unknown"
+          }
+        }
+      }
+    }
+  },
+  "consumer": {
+    "list": {
+      "title": "Consumers list",
+      "table": {
+        "columns": {
+          "partitionId": "# partition",
+          "host": "Server",
+          "topic": "Topic",
+          "id": "Consumer ID",
+          "consumerGroup": "Consumer group",
+          "lag": "Lag",
+          "offsets": {
+            "current": "Current Offset",
+            "end": "Last offset"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,119 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <form role="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="card card-dark">
+                <div class="card-header">
+                    <h3 class="card-title">{{ 'messages.list' | translate }}</h3>
+                </div>
+                <div class="card-body">
+                    <ngx-spinner [name]="messagesSpinnerId" [fullScreen]="false" color="#3c8dbc" type="square-jelly-box" size="medium"></ngx-spinner>
+                    <div class="form-group">
+                        <label for="topic">{{ 'messages.form.topic' | translate }}</label>
+                        <ng-select appearance="outline" formControlName="topic" labelForId="topic" id="topic" (change)="selectTopic($event)">
+                            <ng-option [value]="topic.name" *ngFor="let topic of topics">{{topic.name}}</ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="groupId">{{ 'messages.form.groupId' | translate }}</label>
+                        <div class="d-flex">
+                            <input type="text" class="form-control" id="groupId" formControlName="groupId">
+                            <button type="button" class="btn btn-default" (click)="refreshGroupId()" title="{{ 'messages.buttons.refreshGroupId' | translate }}">
+                                <i class="fas fa-sync"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="numberOfMessages">{{ 'messages.form.numberOfMessages' | translate }}</label>
+                        <input type="number" min="0" class="form-control" id="numberOfMessages" formControlName="numberOfMessages">
+                    </div>
+                    <div class="form-group">
+                        <label>{{ 'messages.form.commitLabel' | translate }}</label>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="commit" formControlName="commit">
+                            <label class="form-check-label" for="commit">{{ 'messages.form.commit' | translate }}</label>
+                        </div>
+                    </div>
+
+                    <div class="advanced-mode" (click)="showMore = !showMore">
+                        <span><i class="fas" [ngClass]="showMore ? 'fa-minus' : 'fa-plus'"></i> {{ 'messages.form.advancedFeatures' | translate }}</span>
+                    </div>
+
+                    <div class="show-more" [ngClass]="{'show': showMore}">
+                        <div class="form-group">
+                            <label for="topic">{{ 'messages.form.fromGroupId' | translate }}</label>
+                            <div class="row">
+                                <div class="col-8">
+                                    <ng-select class="messsage-select" appearance="outline" formControlName="groupToUse" labelForId="groupToUse" id="groupToUse">
+                                        <ng-option [value]="consumerGroup.groupId" *ngFor="let consumerGroup of consumerGroups">{{consumerGroup.groupId}}</ng-option>
+                                    </ng-select>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                {{ 'messages.form.offset.add' | translate }}
+                                            </span>
+                                        </div>
+                                        <input type="number" class="form-control" id="addOffset" formControlName="addOffset" placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <button type="button" (click)="copyOffset()" [disabled]="!form.valid || !form.controls.groupToUse.value" class="btn btn-primary">{{ 'messages.buttons.setOffset' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="action-bar float-right">
+                        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">{{ 'messages.buttons.select' | translate }}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form role="form" [formGroup]="editForm" (ngSubmit)="onSubmitEdit()">
+            <div class="card card-dark" *ngIf="records">
+                <div class="card-header">
+                    <h3 class="card-title">{{ 'messages.list' | translate }}</h3>
+                    <div class="card-tools">
+                        <button type="button" hasRole="ADMIN" class="btn btn-tool" data-card-widget="collapse" [isOpen]="!editedRecord">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <app-json-viewer
+                    [data]="records"
+                    (select)="selectRecord($event.isChecked, $event.node)"
+                    (edit)="editRecord($event)">
+                </app-json-viewer>
+            </div>
+            <div class="card-footer card-footer-flex" hasRole="ADMIN">
+                <div class="form-group flex-grow-1 d-flex align-items-center">
+                    <label for="topic">{{ 'messages.form.topicOut' | translate }}</label>
+                    <ng-select appearance="outline" formControlName="topic" labelForId="topic" id="topic" class="flex-grow-1 ml-3">
+                        <ng-option [value]="topic.name" *ngFor="let topic of topics">{{topic.name}}</ng-option>
+                    </ng-select>
+                </div>
+                <div class="action-bar ml-3">
+                    <button type="submit" [disabled]="!editForm.valid || selectedRecords.length < 1" class="btn btn-primary">{{ 'messages.buttons.save' | translate }}</button>
+                    <app-modal classType="bg-primary"
+                    (execute)="onSubmitEditModal()"
+                    (toggleModal)="confirmCopyModal=$event;editForm.enable()"
+                    modalTitle="messages.copyModal.title"
+                    okButton="common.modal.confirm"
+                    [displayModal]="confirmCopyModal"
+                    >
+                    <p>{{ 'messages.copyModal.text' | translate: {number: selectedRecords.length} }}</p>
+                </app-modal>
+            </div>
+        </div>
+    </div>
+</form>
+<app-message-edit *ngIf="editedRecord" [data]="editedRecord?.value" (cancel)="editedRecord=null" (update)="updateRecord($event)"></app-message-edit>
+</div>
+<!-- /.card -->
+</section>
+<!-- /.content -->

@@ -1,0 +1,101 @@
+{
+    "messages": {
+        "title": "Lire les messages",
+        "list": "Liste des messages",
+        "extras": "Extras",
+        "edit": "Editer le message",
+        "information": "Messages information",
+        "buttons": {
+            "select": "Lire",
+            "setOffset": "Copier Offset",
+            "save": "Copier",
+            "editSave": "Modifier",
+            "reset": "Réinitialiser",
+            "cancel": "Annuler",
+            "refreshGroupId": "Changer l'ID du groupe"
+        },
+        "form": {
+            "topic": "Nom du topic",
+            "advancedFeatures": "Fonctionnalitées avancées",
+            "topicOut": "Topic de destination",
+            "commit": "Commit",
+            "numberOfMessages": "Nombre de messages à récupérer",
+            "offsetStart": "Offset de départ",
+            "commitLabel": "Marquer les messages comme lus",
+            "groupId": "Id du groupe",
+            "fromGroupId": "Groupe à utiliser comme offset de départ",
+            "offset": {
+                "beginning": "Depuis le début",
+                "from": "Depuis le groupe existant",
+                "add": "Ajout décalage"
+            }
+        },
+        "copyModal": {
+            "title": "Confirmation de la copie des messages",
+            "text": "Voulez-vous copier les {{number}} message(s) ?"
+        },
+        "editMessage": {
+            "messages": {
+                "json": {
+                    "error": {
+                        "title": "Format",
+                        "text": "Le format du message est invalide"
+                    }
+                },
+                "topicSelect": {
+                    "error": {
+                        "title": "Topic de destination",
+                        "text": "Aucun topic de destination n'a été selectionné"
+                    }
+                },
+                "editOffset": {
+                    "success": {
+                        "title": "Changer l'offset",
+                        "text": "L'offset du groupe a été changé"
+                    },
+                    "error": {
+                        "title": "Changer l'offset",
+                        "text": "La modification de l'offset a échouée"
+                    }
+                },
+                "select": {
+                    "error": {
+                        "title": "Selection",
+                        "text": "Aucun message n'a été selectionné"
+                    }
+                },
+                "produce": {
+                    "success": {
+                        "title": "Copie de messages",
+                        "text": "Les messages ont bien été copiés"
+                    },
+                    "error": {
+                        "title": "Copie de messages",
+                        "text": "La copie des messages a échouée"
+                    }
+                }
+            }
+        },
+        "jsonViewer": {
+            "closeAll": "Fermer tous les éléments",
+            "openAll": "Ouvrir tous les éléments",
+            "edit": "Editer le message",
+            "clipboard": "Copier dans le presse-papier",
+            "select": "Selectionner le message",
+            "open": "Ouvrir l'élément",
+            "close": "Fermer l'élément",
+            "messages": {
+                "clipboard": {
+                    "success": {
+                        "title": "Presse-papier",
+                        "text": "L'élément a été copié dans le presse-papier"
+                    },
+                    "error": {
+                        "title": "Presse-papier",
+                        "text": "La copie dans le presse-papier a échouée"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "side-menu": {
+        "dashboard": "Dashboard",
+        "cluster": "Cluster",
+        "clusters": "Clusters",
+        "brokers": "Brokers",
+        "kafka-information": "Kafka Information",
+        "topics": "Topics",
+        "consumerGroups": "Consumers",
+        "messages": "Messages",
+        "contacts": "Contacts",
+        "repository": "Repository",
+        "kafka-connect": "Kafka connect",
+        "connectors": "Connectors"
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "login": {
+        "headline": "Connectez vous pour pouvoir utiliser l'application",
+        "username": "Utilisateur",
+        "password": "Mot de passe",
+        "buttons": {
+            "oauth": "S'authentifier avec OAuth",
+            "login": "Se connecter"
+        },
+        "modal": {
+            "title": "Formulaire d'authentification",
+            "error": "Erreur d'authentification ({{ error }})",
+            "wrong-identifier": "Identifiant ou Mot de passe incorrect",
+            "incorrect": "Formulaire incorrect"
+        }
+    }
+}

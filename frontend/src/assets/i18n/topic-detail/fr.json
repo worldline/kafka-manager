@@ -1,0 +1,5 @@
+{
+  "topic-detail": {
+    "title": "Information du topic : {{topicName}}"
+  }
+}

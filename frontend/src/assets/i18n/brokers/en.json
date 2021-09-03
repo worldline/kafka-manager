@@ -1,0 +1,32 @@
+{
+  "brokers": {
+    "title": "Brokers information",
+    "list": "Available brokers",
+    "table": {
+      "columns": {
+        "id": "#ID",
+        "server": "Server",
+        "status": "Status",
+        "nbTopics": "Number of topic",
+        "nbPartitions": "Number of partitions",
+        "leaders": "Leaders",
+        "actions": "Actions"
+      },
+      "buttons": {
+        "edit-settings": "Update settings"
+      }
+    }
+  },
+  "brokerSettings": {
+    "messages": {
+        "success": {
+            "title": "Update broker",
+            "text": "The broker {{brokerId}} has been updated"
+        },
+        "error": {
+            "title": "Update broker",
+            "text": "The update broker {{brokerId}} has failed"
+        }
+    }
+  }
+}

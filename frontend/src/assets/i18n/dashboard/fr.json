@@ -1,0 +1,32 @@
+{
+    "dashboard": {
+        "title": "Dashboard",
+        "clusters": {
+            "buttons": {
+                "add": "Ajouter un cluster"
+            },
+            "list": "Clusters disponibles",
+            "table": {
+                "columns": {
+                    "name": "Nom",
+                    "zkAddr": "Adresse du Zookeeper",
+                    "brokerAddrs": "Adresse des brokers",
+                    "jmxPort": "Port JMX",
+                    "comment": "Commentaire",
+                    "actions": "Actions"
+                },
+                "buttons": {
+                    "view": "Selectionner le cluster",
+                    "edit": "Editer le cluster",
+                    "brokerData": "Voir les informations des brokers"
+                }
+            }
+        },
+        "available": {
+            "brokers": "Brokers disponibles",
+            "clusters": "Cluster disponibles",
+            "consumer-group": "Groupe de consommateur disponibles",
+            "topics": "Topics disponibles"
+        }
+    }
+}

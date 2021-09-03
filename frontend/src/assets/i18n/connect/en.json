@@ -1,0 +1,180 @@
+{
+  "connect": {
+    "edit-connector": {
+      "title": "Edit connecteur {{connectorName}}"
+    },
+    "add-connector": {
+      "title": "Add connector",
+      "form": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Name"
+        },
+        "topic": {
+          "label": "Topic",
+          "placeholder": "Topic"
+        },
+        "configKey": {
+          "label": "Configuration",
+          "placeholder": "Configuration"
+        },
+        "configValue": {
+          "label": "Value",
+          "placeholder": "Value"
+        },
+        "type": "Type",
+        "plugin": "Plugin",
+        "buttons": {
+          "save": "Add",
+          "edit": "Edit",
+          "deleteConfig": "Delete configuration",
+          "addConfig": "Add configuration"
+        }
+      },
+      "messages": {
+        "create": {
+          "success": {
+            "title": "Create connector",
+            "text": "The connector {{connectorName}} has been created"
+          },
+          "error": {
+              "title": "Create connector",
+              "text": "The action has failed"
+          }
+        },
+        "edit": {
+          "success": {
+            "title": "Edit connector",
+            "text": "The connector {{connectorName}} has been edited"
+          },
+          "error": {
+              "title": "Edit connector",
+              "text": "The action has failed"
+          }
+        }
+      }
+    },
+    "connector-detail": {
+      "title": "Connector data: {{connectorName}}"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "topology": "Topology",
+      "label": {
+        "keyData": "Indicators"
+      },
+      "indicators": {
+        "sinkConnectors": "Sink connectors",
+        "sourceConnectors": "Source connectors",
+        "topics": "Topics used by connectors"
+      },
+      "messages": {
+        "error": {
+          "title": "Kafka connect",
+          "text": "Connect connect to kafka connect"
+        }
+      }
+    },
+    "connector": {
+      "modal": {
+        "delete-content": "Are you sure to delete this connector ?"
+      },
+      "buttons": {
+        "resume": "Resume",
+        "pause": "Pause",
+        "restart": "Restart",
+        "delete": "Delete",
+        "edit": "Edit"
+      },
+      "label": {
+        "keyData": "Main data",
+        "summary": "Resume",
+        "configuration": "Configuration"
+      },
+      "indicators": {
+        "status": "Status"
+      },
+      "task": {
+        "table": {
+          "columns": {
+            "id": "ID",
+            "status": "Status",
+            "worker": "Worker",
+            "actions": "Actions",
+            "trace": "Error trace"
+          }
+        }
+      },
+      "type": "Type",
+      "class": "Class",
+      "topic": "Topic",
+      "messages": {
+        "resume": {
+          "success": {
+            "title": "Resume connector",
+            "text": "The connector {{connectorName}} has been resumed"
+          },
+          "error": {
+            "title": "Resume connector",
+            "text": "The action on connector {{connectorName}} has failed"
+          }
+        },
+        "pause": {
+          "success": {
+            "title": "Pause connector",
+            "text": "The connector {{connectorName}} has been paused"
+          },
+          "error": {
+            "title": "Pause connector",
+            "text": "The action on connector {{connectorName}} has failed"
+          }
+        },
+        "restart": {
+          "success": {
+            "title": "Restart connector",
+            "text": "The connector {{connectorName}} has been restared"
+          },
+          "error": {
+            "title": "Restart connector",
+            "text": "The action on connector {{connectorName}} has failed"
+          }
+        },
+        "restartTask": {
+          "success": {
+            "title": "Restart task",
+            "text": "The task has been restared"
+          },
+          "error": {
+            "title": "Restart task",
+            "text": "The action on task has failed"
+          }
+        },
+        "delete": {
+          "success": {
+            "title": "Delete connector",
+            "text": "The connector {{connectorName}} has been deleted"
+          },
+          "error": {
+            "title": "Delete connector",
+            "text": "The action on connector {{connectorName}} has failed"
+          }
+        }
+      }
+    },
+    "connectors": {
+      "list": "Connector list",
+      "tasks": "Task list",
+      "buttons": {
+        "create": "Create new connector"
+      },
+      "table": {
+        "columns": {
+          "name": "Name",
+          "type": "Type",
+          "topic": "Topic",
+          "status": "Status"
+        }
+      }
+    }
+  }
+}

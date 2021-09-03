@@ -1,0 +1,71 @@
+{
+  "metrics" : {
+    "topics": {
+      "title": "Monitoring",
+      "heat": {
+        "title": "Heat map"
+      }
+    },
+    "topic": {
+      "title": "Mesures du topic : {{topicName}}",
+      "jmx": {
+        "title": "Mesure des flux",
+        "tabs": {
+          "last": "Actuelle",
+          "chart": "Historique"
+        },
+        "alerts": {
+          "title": "Fonctionnalité indisponible",
+          "text": "Une connexion JMX est nécéssaire pour retrouver ces informations"
+        }
+      },
+      "lag": {
+        "title": "Lag par groupe de consommateur",
+        "tabs": {
+          "last": "Actuelle",
+          "chart": "Historique"
+        },
+        "form": {
+          "byPartition": "Affichage par partition"
+        }
+      },
+      "charts": {
+        "refresh": "Rafraîchir",
+        "messagesPerSeconds": "Messages in / sec",
+        "bytesInPerSeconds": "Bytes in / sec",
+        "bytesOutPerSeconds": "Bytes out / sec",
+        "bytesRejectedPerSeconds": "Bytes rejected / sec",
+        "failedFetchPerSeconds": "Failed fetch request / sec",
+        "failedProducePerSeconds": "Failed produce request / sec",
+        "messages": {
+          "error": {
+            "title": "Chargement graphique",
+            "text": "Impossible de charger le graphique"
+          }
+        }
+      },
+      "currentLag": {
+        "groupId": "ID du groupe",
+        "partition": "ID de partition",
+        "currentOffset": "Offset courant",
+        "endOffset": "Offset de fin",
+        "lag": "Lag"
+      },
+      "currentMetrics": {
+        "metric": "Type de mesure",
+        "mean": "Mean",
+        "oneMn": "1 min",
+        "fiveMn": "5 min",
+        "fifteenMn": "15 min",
+        "messages": {
+          "error": {
+            "get": {
+              "title": "Récupération des mesures",
+              "text": "Aucune mesure n'est disponible pour ce topic"
+            }
+          }
+        }
+      }
+    }
+  }
+}

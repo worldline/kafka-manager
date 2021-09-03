@@ -1,0 +1,110 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body header-actions">
+                <div class="header-actions">
+                    <button [disabled]="!settings?.enableMetrics" type="button" class="btn btn-primary mr-2" [routerLink]="['metrics']">{{ 'topics.details.buttons.metrics' | translate }}</button>
+                    <button type="button" class="btn btn-primary mr-2" hasRole="ADMIN" (click)="goToUpdateSettings()">{{ 'topics.details.buttons.updateSettings' | translate }}</button>
+                    <button type="button" class="btn btn-primary mr-2" hasRole="ADMIN" (click)="goToAddPartition()">{{ 'topics.details.buttons.addPartition' | translate }}</button>
+                    <button type="button" class="btn btn-primary mr-2" hasRole="ADMIN" (click)="goToReassignPartition()">{{ 'topics.details.buttons.reassignPartition' | translate }}</button>
+                    <button type="button" class="btn btn-danger" hasRole="ADMIN" (click)="deleteModalState=true">{{ 'topics.details.buttons.delete' | translate }}</button>
+                    <app-modal classType="bg-danger" (execute)="deleteTopic()" (toggleModal)="deleteModalState=$event" modalTitle="topics.details.buttons.delete" [displayModal]="deleteModalState">
+                        <p>{{ 'topics.modal.delete-content' | translate }}</p>
+                    </app-modal>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card card-dark">
+                    <div class="card-header">
+                        <h2 class="card-title">{{ 'topics.details.label.keyData' | translate }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12" *ngFor="let cardIndicator of cardIndicators">
+                                <app-card-indicator [cardIndicator]="cardIndicator"></app-card-indicator>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card card-dark">
+                    <div class="card-header">
+                        <h2 class="card-title">{{ 'topics.details.label.summary' | translate }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <dl>
+                            <dt *ngIf="topicLag !== undefined">{{ 'topics.details.label.lag' | translate }}</dt>
+                            <dd *ngIf="topicLag !== undefined">{{topicLag}}</dd>
+
+                            <dt>{{ 'topics.details.label.brokersLeaderSpread' | translate }}</dt>
+                            <dd>{{topic.brokersLeaderSkewed}}</dd>
+
+                            <dt>{{ 'topics.details.label.nbBrokerForTopic' | translate }}</dt>
+                            <dd>{{ topic.nbBrokerForTopic }}</dd>
+
+                            <dt>{{ 'topics.details.label.nbPartitions' | translate }}</dt>
+                            <dd>{{ topic.nbPartitions }}</dd>
+
+                            <dt>{{ 'topics.details.label.replicationFactor' | translate }}</dt>
+                            <dd>
+                                {{ topic.nbReplications }}
+                                <span *ngIf="topic.nbReplications <= 1">
+                                    <i title="{{ 'topics.details.label.topicNotReplicated' | translate }}" class="fas fa-exclamation-triangle"></i>
+                                </span>
+                            </dd>
+
+                            <dt>{{ 'topics.details.label.preferredReplicas' | translate }}</dt>
+                            <dd>{{ topic.preferredReplicas }} %</dd>
+
+                            <dt>{{ 'topics.details.label.sumPartitionOffset' | translate }}</dt>
+                            <dd>{{ topic.sumPartitionOffset }}</dd>
+
+                            <dt>{{ 'topics.details.label.totalNumberOfBrokers' | translate }}</dt>
+                            <dd>{{ topic.totalNumberOfBrokers }}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-dark">
+            <div class="card-header">
+                <h2 class="card-title">{{ 'topics.details.label.partitions' | translate }}</h2>
+            </div>
+            <div class="card-body p-0 table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>{{ 'topics.details.label.partition' | translate }}</th>
+                            <th>{{ 'topics.details.label.endOffset' | translate }}</th>
+                            <th>{{ 'topics.details.label.leader' | translate }}</th>
+                            <th>{{ 'topics.details.label.preferLeader' | translate }}</th>
+                            <th>{{ 'topics.details.label.replicas' | translate }}</th>
+                            <th>{{ 'topics.details.label.isr' | translate }}</th>
+                            <th>{{ 'topics.details.label.underReplicate' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let partition of topic.partitions">
+                            <td>{{ partition.partition }}</td>
+                            <td>{{ partition.endOffset }}</td>
+                            <td>{{ partition.leader }}</td>
+                            <td><app-check [check]="partition.prefreLeader"></app-check></td>
+                            <td>{{ partition.replicas }}</td>
+                            <td>{{ partition.isr }}</td>
+                            <td><app-check [check]="partition.underReplicate"></app-check></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <app-consumer-list *ngIf="consumerGroupMembers?.length > 0" [filterTopic]="topic.name" [displayOffsets]="false" [displayConsumerGroup]="true" [displayTopic]="false" [consumers]="consumerGroupMembers"></app-consumer-list>
+    </div>
+</section>

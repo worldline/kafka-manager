@@ -1,0 +1,43 @@
+databaseChangeLog:
+- changeSet:
+    id: 1
+    author: a525125
+    changes:
+    - createTable:
+        tableName: cluster
+        columns:
+        - column:
+              name: id
+              type: varchar(40)
+              constraints:
+                primaryKey: true
+                nullable: false
+                primaryKeyName: PK_CLUSTER
+        - column:
+              name: creation_date
+              type: datetime
+        - column:
+              name: name
+              type: varchar(255)
+        - column:
+              name: zk_addr
+              type: text
+        - column:
+              name: broker_addrs
+              type: text
+        - column:
+              name: kafka_version
+              type: varchar(255)
+        - column:
+              name: comment
+              type: text
+- changeSet:
+    id: 2
+    author: a525125
+    changes:
+    - addColumn:
+        tableName: cluster
+        columns:
+        - column:
+              name: kafka_connect_addr
+              type: text

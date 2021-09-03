@@ -1,0 +1,14 @@
+<ng-container>
+    <app-header (toggleMenuSidebar)="toggleMenuSidebar()"></app-header>
+    <app-menu-sidebar (mainSidebarHeight)="mainSidebarHeight($event)"></app-menu-sidebar>
+
+    <div #contentWrapper class="content-wrapper">
+        <app-content-header></app-content-header>
+        <router-outlet></router-outlet>
+        <ngx-spinner name="spinner-global" fullScreen="false" zIndex="20" color="#3c8dbc" type="square-jelly-box"></ngx-spinner>
+    </div>
+
+    <app-footer></app-footer>
+    <aside class="control-sidebar control-sidebar-dark"></aside>
+    <div id="sidebar-overlay" (click)="toggleMenuSidebar()"></div>
+</ng-container>

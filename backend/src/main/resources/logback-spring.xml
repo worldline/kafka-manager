@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+	<property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>
+	<property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(%-50.50(%logger{39}:%L)){cyan} [%X{account}][%X{subscription}][%X{signer}] %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+	<property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} [%thread] %-50.50(%logger{39}:%L) [%X{account}][%X{subscription}][%X{signer}] : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+	<springProperty name="LOG_ARCHIVE_PATTERN" source="logging.pattern.archive"/>
+	<springProperty scope="context" name="SERVICE" source="spring.application.name" defaultValue="unknown"/>
+	<springProperty scope="context" name="MAX_HISTORY_LENGTH_VALUE" source="logback.duration" defaultValue="30"/>
+	<springProperty scope="context" name="APPENDER" source="logback.appenders" defaultValue="CONSOLE"/>
+
+	<!-- APPENDERS -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+		</encoder>
+		<file>${LOG_FILE}</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_ARCHIVE_PATTERN:-${LOG_FILE}.%d{yyyy-MM-dd}.tar.gz}</fileNamePattern>
+			<maxHistory>${MAX_HISTORY_LENGTH_VALUE}</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<!-- Could be further improved if needed => https://stackoverflow.com/a/34640063 -->
+	<root level="INFO">
+		<if condition='property("APPENDER").equalsIgnoreCase("FILE")'>
+			<then>
+				<appender-ref ref="FILE"/>
+			</then>
+			<else>
+				<appender-ref ref="CONSOLE"/>
+			</else>
+		</if>
+	</root>
+</configuration>

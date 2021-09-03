@@ -1,0 +1,17 @@
+{
+    "login": {
+        "headline": "Login to start using the application",
+        "username": "Username",
+        "password": "Password",
+        "buttons": {
+            "oauth": "Login with OAuth",
+            "login": "Login"
+        },
+        "modal": {
+            "title": "Authentication form",
+            "error": "Authentication error ({{ error }})",
+            "wrong-identifier": "Login or Password wrong",
+            "incorrect": "Incorrect form"
+        }
+    }
+}

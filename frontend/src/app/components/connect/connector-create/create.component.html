@@ -1,0 +1,75 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+       <div class="card card-primary">
+           <form role="form" [formGroup]="connectorForm" (ngSubmit)="onSubmit()">
+               <div class="card-body">
+                   <div class="form-group">
+                       <label for="connector-name">{{ 'connect.add-connector.form.name.label' | translate }}</label>
+                       <input type="text" class="form-control" id="connector-name" placeholder="{{ 'connect.add-connector.form.name.placeholder' | translate }}" formControlName="name">
+                   </div>
+                   <div class="form-group">
+                       <label for="connector-topic">{{ 'connect.add-connector.form.topic.label' | translate }}</label>
+                       <input type="text" class="form-control" id="connector-topic" placeholder="{{ 'connect.add-connector.form.topic.placeholder' | translate }}" formControlName="topic">
+                   </div>
+                   <div class="form-group">
+                        <label for="type">{{ 'connect.add-connector.form.type' | translate }}</label>
+                        <ng-select appearance="outline" labelForId="type" id="type" formControlName="type" (change)="selectType($event)">
+                            <ng-option [value]="type.key" *ngFor="let type of plugins | keyvalue">{{type.key}}</ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">{{ 'connect.add-connector.form.plugin' | translate }}</label>
+                        <ng-select appearance="outline" labelForId="type" id="type" formControlName="plugin" (change)="selectPlugin($event)">
+                            <ng-option [value]="plugin.class" *ngFor="let plugin of currentPlugins">{{plugin.class}}</ng-option>
+                        </ng-select>
+                    </div>
+                    <ng-container *ngIf="pluginInformation || connector">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>{{ 'connect.add-connector.form.configKey.label' | translate }}</label>
+                            </div>
+                            <div class="col-md-6">
+                                <label>{{ 'connect.add-connector.form.configValue.label' | translate }}</label>
+                            </div>
+                        </div>
+                        <div class="row form-group" *ngFor="let config of configuration; let isFirst = first;">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="{{ 'connect.add-connector.form.configKey.placeholder' | translate }}" formControlName="config-key-{{config.id}}">
+                            </div>
+                            <div class="col-md-6 value-field">
+                                <ng-container *ngIf="getType(config.data.type) === 'default'">
+                                    <input type="text" class="form-control" placeholder="{{ 'connect.add-connector.form.configValue.placeholder' | translate }}" formControlName="config-value-{{config.id}}">
+                                </ng-container>
+                                <ng-container *ngIf="getType(config.data.type) === 'number'">
+                                    <input type="number" class="form-control" placeholder="{{ 'connect.add-connector.form.configValue.placeholder' | translate }}" formControlName="config-value-{{config.id}}">
+                                </ng-container>
+                                <ng-container *ngIf="getType(config.data.type) === 'boolean'">
+                                    <ng-select class="config-select" formControlName="config-value-{{config.id}}">
+                                        <ng-option value="true">true</ng-option>
+                                        <ng-option value="false">false</ng-option>
+                                    </ng-select>
+                                </ng-container>
+                                <button *ngIf="!config.data.required" type="button" class="btn btn-default" (click)="removeConfiguration(config.id)" title="{{ 'connect.add-connector.form.buttons.deleteConfig' | translate }}"><i class="fas fa-minus"></i></button>
+                            </div>
+                            <span *ngIf="config.data.documentation" class="config-description">{{config.data.documentation}}</span>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12 button-add-configuration">
+                                <button type="button" class="btn btn-default" (click)="addConfiguration()" title="{{ 'connect.add-connector.form.buttons.addConfig' | translate }}"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </ng-container>
+               </div>
+               <div class="card-footer">
+                    <div class="action-bar float-right">
+                        <button type="submit" class="btn btn-primary" [disabled]="!connectorForm.valid">{{ (editMode ? 'connect.add-connector.form.buttons.edit' : 'connect.add-connector.form.buttons.save') | translate }}</button>
+                    </div>
+               </div>
+           </form>
+       </div>
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->

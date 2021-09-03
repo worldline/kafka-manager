@@ -1,0 +1,178 @@
+{
+    "topics": {
+        "reassignPartitions": {
+            "title": "Réassignation des partitions",
+            "messages": {
+                "success": {
+                    "title": "Réassignation de partitions",
+                    "text": "Les partitions du topic {{topicName}} ont été réassignées"
+                },
+                "error": {
+                    "title": "Réassignation de partitions",
+                    "text": "La réassignation de partitions a échouée"
+                }
+            },
+            "form": {
+                "table": {
+                    "columns": {
+                        "partition": "ID de partition",
+                        "leader": {
+                            "label": "Leader",
+                            "placeholder": "Choisir un leader"
+                        },
+                        "replicas": {
+                            "label": "Réplications",
+                            "placeholder": "Séléctionner les réplications"
+                        }
+                    }
+                }
+            },
+            "partitionNumber": "Partition #{{partition}}"
+        },
+        "addPartitions": {
+            "title": "Ajouter des partitions",
+            "messages": {
+                "success": {
+                    "title": "Ajout de partitions",
+                    "text": "Les partitions ont été ajoutée au topic {{topicName}}"
+                },
+                "error": {
+                    "title": "Ajout de partitions",
+                    "text": "L'ajout de partitions à échoué"
+                }
+            },
+            "form": {
+                "buttons": {
+                    "save": "Ajouter"
+                },
+                "topicName": {
+                    "label": "Nom du topic"
+                },
+                "nbPartitions": {
+                    "label": "Nombre de partitions voulues (actuelles : {{nbPartitions}})",
+                    "placeholder": "Nombre de partitions à ajouter"
+                },
+                "brokers": {
+                    "label": "Liste des brokers auquels les partitions seront associées"
+                }
+            }
+        },
+        "details": {
+            "delete": {
+                "confirm": "Voulez vous supprimer ce topic ?",
+                "messages": {
+                    "success": {
+                        "title": "Suppression du topic",
+                        "text": "Le topic {{topicName}} a été supprimé"
+                    },
+                    "error": {
+                        "title": "Suppression du topic",
+                        "text": "La suppression du topic a échouée"
+                    }
+                }
+            },
+            "label": {
+                "brokersLeaderSpread": "Brokers leader spread",
+                "brokersSkewed": "Brokers skewed",
+                "brokersSpread": "Brokers spread",
+                "brokersUnderReplicated": "Brokers under replicated",
+                "consumerGroups": "Liste des groupes de consommateurs",
+                "endOffset": "Offset de fin",
+                "isr": "In Sync Replicas",
+                "keyData": "Données importantes",
+                "lag": "Lag du topic",
+                "leader": "Leader",
+                "nbBrokerForTopic": "Nombre de brokers",
+                "nbPartitions": "Nombre de partitions",
+                "replicationFactor": "Facteur de replication",
+                "topicNotReplicated": "Les données dans ce topic ne sont pas répliquées",
+                "partition": "# Partition",
+                "partitions": "Partitions",
+                "preferLeader": "Leader favori",
+                "preferredReplicas": "Replica favori",
+                "replicas": "Replicas",
+                "summary": "Résumé",
+                "sumPartitionOffset": "Somme des offsets",
+                "totalNumberOfBrokers": "Nombre total de brokers",
+                "underReplicate": "En Replication"
+            },
+            "buttons": {
+                "updateSettings": "Modifier la configuration",
+                "addPartition": "Ajouter des partitions",
+                "reassignPartition": "Réassigner les partitions",
+                "delete": "Supprimer le topic",
+                "metrics": "Graphiques"
+            }
+        },
+        "create": {
+            "messages": {
+                "success": {
+                    "title": "Création du topic",
+                    "text": "Le topic {{topicName}} a été créé"
+                },
+                "error": {
+                    "title": "Création du topic",
+                    "text": "La création du topic à échouée"
+                }
+            },
+            "form": {
+                "buttons": {
+                    "save": "Enregistrer"
+                },
+                "name": {
+                    "label": "Nom",
+                    "placeholder": "Nom du topic"
+                },
+                "nbPartitions": {
+                    "label": "Nombre de partitions",
+                    "placeholder": "Nombre de partitions"
+                },
+                "replicationFactor": {
+                    "label": "Facteur de réplication",
+                    "placeholder": "Facteur de réplication"
+                },
+                "retentionTime": {
+                    "label": "Temps de rétention",
+                    "placeholder": "Temps de rétention en ms"
+                },
+                "retentionBytes": {
+                    "label": "Nombre de bytes de rétention",
+                    "placeholder": "Nombre de bytes de rétention"
+                }
+            }
+        },
+        "list": {
+            "title": "Information des topics",
+            "buttons": {
+                "create": "Créér un topic"
+            },
+            "table": {
+                "title": "Topics disponibles",
+                "columns": {
+                    "name": "Nom",
+                    "nbBrokers": "Nombre de broker",
+                    "nbSkewedBrokers": "Nombre de skewed broker",
+                    "nbPartitions": "Nombre de partition",
+                    "replicationFactor": "Facteur de réplication",
+                    "nbUnderReplications": "Nombre en replication"
+                }
+            }
+        },
+        "settings-edit": {
+            "title": "Configuration du topic",
+            "messages": {
+                "success": {
+                    "title": "Mise à jour du topic",
+                    "text": "Le topic {{topicName}} a été mis à jour"
+                },
+                "error": {
+                    "title": "Mise à jour du topic",
+                    "text": "La mise à jour du topic {{topicName}} à échouée"
+                }
+            }
+        },
+        "modal": {
+            "delete-content": "Etes-vous sûr de vouloir supprimer ce topic ?"
+        }
+    }
+}

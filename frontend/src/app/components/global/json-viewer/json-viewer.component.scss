@@ -1,0 +1,15 @@
+.json-viewer {
+    border: 1px solid #3c8dbc;
+
+    .json-header {
+        background-color: #3c8dbc;
+        padding: 10px;
+        button:not(:first-child) {
+            margin-left: 10px;
+        }
+    }
+
+    .json-content {
+        padding-top: 10px;
+    }
+}

@@ -1,0 +1,99 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <div class="card" hasRole="ADMIN">
+            <div class="card-body text-right">
+                <button type="button" class="btn btn-primary" hasRole="ADMIN" (click)="goToCreateConnector()">{{ 'connect.connectors.buttons.create' | translate }}</button>
+            </div>
+        </div>
+        <div class="card card-dark card-indicator">
+            <div class="card-header">
+                <h2 class="card-title">{{ 'connect.dashboard.label.keyData' | translate }}</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-info">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">{{ 'connect.dashboard.indicators.sourceConnectors' | translate }}</span>
+                                <span class="info-box-number">{{sourceConnectors}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-info">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">{{ 'connect.dashboard.indicators.sinkConnectors' | translate }}</span>
+                                <span class="info-box-number">{{sinkConnectors}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-info">
+                                <i class="fas fa-database"></i>
+                            </span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">{{ 'connect.dashboard.indicators.topics' | translate }}</span>
+                                <span class="info-box-number">{{topicsNumber}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main content -->
+    </div>
+    <!-- Main row -->
+</section>
+
+<section *ngIf="connectors?.length > 0">
+    <div class="container-fluid">
+        <div class="card card-dark card-indicator">
+            <div class="card-header">
+                <h2 class="card-title">{{ 'connect.connectors.list' | translate }}</h2>
+            </div>
+            <div class="card-body p-0 table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>{{ 'connect.connectors.table.columns.name' | translate }}</th>
+                            <th>{{ 'connect.connectors.table.columns.type' | translate }}</th>
+                            <th>{{ 'connect.connectors.table.columns.topic' | translate }}</th>
+                            <th>{{ 'connect.connectors.table.columns.status' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let connector of connectors">
+                            <td><a [routerLink]="connector.name">{{ connector.name }}</a></td>
+                            <td>{{ connector.type }}</td>
+                            <td><a [routerLink]="[routeToTopic,connector.config.topic || connector.config.topics]">{{ connector.config.topic || connector.config.topics }}</a></td>
+                            <td><app-check [check]="connector.status === 'UP'"></app-check></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content" *ngIf="events && events.length > 0">
+    <div class="container-fluid">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h2 class="card-title">{{ 'connect.dashboard.topology' | translate }}</h2>
+            </div>
+            <div class="card-body">
+                <app-sankey [data]="events"></app-sankey>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /.content -->

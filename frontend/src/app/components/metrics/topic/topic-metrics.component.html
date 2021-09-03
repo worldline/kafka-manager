@@ -1,0 +1,140 @@
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="container-fluid">
+        <div class="card card-dark">
+            <div class="card-header d-flex p-0">
+                <h3 class="card-title p-3">{{ 'metrics.topic.jmx.title' | translate }}</h3>
+                <ul class="nav nav-pills ml-auto p-2">
+                    <li class="nav-item mr-2">
+                        <a data-tab="jmxChart" class="nav-link active" (click)="toggleTabs($event)">{{ 'metrics.topic.jmx.tabs.chart' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-tab="jmxLast" class="nav-link" (click)="toggleTabs($event)">{{ 'metrics.topic.jmx.tabs.last' | translate }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body table-responsive" *ngIf="jmxEnabled; else noJmx">
+                <app-chart-line data-tab="jmxChart" [data]="chartData"></app-chart-line>
+                <table data-tab="jmxLast" class="table table-striped d-none">
+                    <thead>
+                        <tr>
+                            <th>{{ 'metrics.topic.currentMetrics.metric' | translate }}</th>
+                            <th>{{ 'metrics.topic.currentMetrics.mean' | translate }}</th>
+                            <th>{{ 'metrics.topic.currentMetrics.oneMn' | translate }}</th>
+                            <th>{{ 'metrics.topic.currentMetrics.fiveMn' | translate }}</th>
+                            <th>{{ 'metrics.topic.currentMetrics.fifteenMn' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Messages in /sec</td>
+                            <td>{{ topicMetrics?.messagesPerSeconds?.meanRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.messagesPerSeconds?.oneMinuteRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.messagesPerSeconds?.fiveMinuteRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.messagesPerSeconds?.fifteenMinuteRate | number: '1.0-2' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Bytes in /sec</td>
+                            <td>{{ topicMetrics?.bytesInPerSeconds?.meanRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.bytesInPerSeconds?.oneMinuteRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.bytesInPerSeconds?.fiveMinuteRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.bytesInPerSeconds?.fifteenMinuteRate | number: '1.0-2' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Bytes out /sec</td>
+                            <td>{{ topicMetrics?.bytesOutPerSeconds?.meanRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.bytesOutPerSeconds?.oneMinuteRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.bytesOutPerSeconds?.fiveMinuteRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.bytesOutPerSeconds?.fifteenMinuteRate | number: '1.0-2' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Bytes rejected /sec</td>
+                            <td>{{ topicMetrics?.bytesRejectedPerSeconds?.meanRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.bytesRejectedPerSeconds?.oneMinuteRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.bytesRejectedPerSeconds?.fiveMinuteRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.bytesRejectedPerSeconds?.fifteenMinuteRate | number: '1.0-2' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Failed fetch request /sec</td>
+                            <td>{{ topicMetrics?.failedFetchPerSeconds?.meanRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.failedFetchPerSeconds?.oneMinuteRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.failedFetchPerSeconds?.fiveMinuteRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.failedFetchPerSeconds?.fifteenMinuteRate | number: '1.0-2' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Failed produce request /sec</td>
+                            <td>{{ topicMetrics?.failedProducePerSeconds?.meanRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.failedProducePerSeconds?.oneMinuteRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.failedProducePerSeconds?.fiveMinuteRate | number: '1.0-2' }}</td>
+                            <td>{{ topicMetrics?.failedProducePerSeconds?.fifteenMinuteRate | number: '1.0-2' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ng-template #noJmx>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <h3>
+                            <span class="icon fas fa-info"></span>
+                            {{ 'metrics.topic.jmx.alerts.title' | translate }}
+                        </h3>
+                        <p>{{ 'metrics.topic.jmx.alerts.text' | translate }}</p>
+                    </div>
+                </div>
+            </ng-template>
+            <!-- /.card-body -->
+        </div>
+        <div class="card card-dark">
+            <div class="card-header d-flex p-0">
+                <h3 class="card-title p-3">{{ 'metrics.topic.lag.title' | translate }}</h3>
+                <ul class="nav nav-pills ml-auto p-2">
+                    <li class="nav-item mr-2">
+                        <a data-tab="lagChart" class="nav-link active" (click)="toggleTabs($event)">{{ 'metrics.topic.lag.tabs.chart' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-tab="lagLast" class="nav-link" (click)="toggleTabs($event)">{{ 'metrics.topic.lag.tabs.last' | translate }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body table-responsive">
+                <div data-tab="lagChart">
+                    <div>
+                        <form role="form">
+                            <div class="form-group">
+                                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                    <input class="custom-control-input" type="checkbox" id="byPartition" (change)="byPartition($event)">
+                                    <label for="byPartition" ng-disabled="lagData" class="custom-control-label">{{ 'metrics.topic.lag.form.byPartition' | translate }}</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <app-chart-line [data]="lagData"></app-chart-line>
+                </div>
+                <table data-tab="lagLast" class="table table-striped d-none">
+                    <thead>
+                        <tr>
+                            <th>{{ 'metrics.topic.currentLag.groupId' | translate }}</th>
+                            <th>{{ 'metrics.topic.currentLag.partition' | translate }}</th>
+                            <th>{{ 'metrics.topic.currentLag.currentOffset' | translate }}</th>
+                            <th>{{ 'metrics.topic.currentLag.endOffset' | translate }}</th>
+                            <th>{{ 'metrics.topic.currentLag.lag' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let offset of lagMetrics">
+                            <td><a [routerLink]="[routeToConsumerGroup,offset?.groupId]">{{offset?.groupId}}</a></td>
+                            <td>{{offset?.partition}}</td>
+                            <td>{{offset?.currentOffset ? offset?.currentOffset : '?'}}</td>
+                            <td>{{offset?.endOffset}}</td>
+                            <td>{{offset?.currentOffset ? (offset?.endOffset - offset?.currentOffset) : '?'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->

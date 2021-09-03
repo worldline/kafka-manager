@@ -1,0 +1,119 @@
+spring:
+  application:
+    name: KafkaManager
+    version: "@project.version@"
+    timestamp: "@maven.build.timestamp@"
+  jpa:
+    hibernate:
+      ddl-auto: none
+  datasource:
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    maxActive: 10
+    minActive: 1
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/kafka_manager?serverTimezone=Europe/Paris
+    username: root
+    password: root
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yml
+  jackson.default-property-inclusion: non_null
+
+info:
+  application: ${spring.application.name}
+  version: ${spring.application.version}
+  timestamp: ${spring.application.timestamp}
+
+# Actuator conf
+management.health.elasticsearch.enabled: ${elasticsearch.enable}
+
+# Activation
+authentication.in-memory.enable: true
+database.enable: false
+elasticsearch.enable: false
+kafka-connect.enable: false
+monitoring.enable: true
+
+# Authentication conf
+authentication:
+  in-memory:
+    userLogin: "user"
+    # Default hash is Bcrypt (user)
+    userPasswordHash: "$2a$12$gzzsF/rpcsUP4lu.nE.iv.kcNTCJtqvJhLl9R0V/vkF5Yc5DrMCCe"
+    adminLogin: "admin"
+    # Default hash is Bcrypt (admin)
+    adminPasswordHash: "$2a$12$hOP/UuPC3XcO2gqPgiYwruafVP4EaGf9UbU4YGW8SN.nZbpewlKXq"
+  jwt:
+    expiration: 14400
+    # Base 64 encoded
+    secret: "OG5IazZnNjdjVjJZOENaYTRUNEFZd3czWUVTODJZeUg="
+
+# Metrics conf
+metrics:
+  enable: true
+  schedule: true
+  cron-async-storage: "0 */1 * * * *"
+  clean:
+    cron-clean-storage: "0 */1 * * * *"
+    clean-time: 30
+
+# Event conf
+event:
+  clean:
+    cron-clean-storage: "0 */1 * * * *"
+    clean-time: 30
+
+# Kafka config
+kafka.consumerservice.poll.duration: 500
+
+# JMX Config
+jmx:
+  beans:
+    version:
+      bean: "kafka.server:id=%s,type=app-info"
+      attributes:
+        - Version
+    metrics-topic-messages-in-per-sec:
+      bean: "kafka.server:name=MessagesInPerSec,topic=%s,type=BrokerTopicMetrics"
+      attributes:
+        - MeanRate
+        - OneMinuteRate
+        - FiveMinuteRate
+        - FifteenMinuteRate
+    metrics-topic-bytes-in-per-sec:
+      bean: "kafka.server:name=BytesInPerSec,topic=%s,type=BrokerTopicMetrics"
+      attributes:
+        - MeanRate
+        - OneMinuteRate
+        - FiveMinuteRate
+        - FifteenMinuteRate
+    metrics-topic-bytes-out-per-sec:
+      bean: "kafka.server:name=BytesOutPerSec,topic=%s,type=BrokerTopicMetrics"
+      attributes:
+        - MeanRate
+        - OneMinuteRate
+        - FiveMinuteRate
+        - FifteenMinuteRate
+    metrics-topic-bytes-rejected-per-sec:
+      bean: "kafka.server:name=BytesRejectedPerSec,topic=%s,type=BrokerTopicMetrics"
+      attributes:
+        - MeanRate
+        - OneMinuteRate
+        - FiveMinuteRate
+        - FifteenMinuteRate
+    metrics-topic-failed-fetch-req-per-sec:
+      bean: "kafka.server:name=FailedFetchRequestsPerSec,topic=%s,type=BrokerTopicMetrics"
+      attributes:
+        - MeanRate
+        - OneMinuteRate
+        - FiveMinuteRate
+        - FifteenMinuteRate
+    metrics-topic-failed-produce-req-per-sec:
+      bean: "kafka.server:name=FailedProduceRequestsPerSec,topic=%s,type=BrokerTopicMetrics"
+      attributes:
+        - MeanRate
+        - OneMinuteRate
+        - FiveMinuteRate
+        - FifteenMinuteRate

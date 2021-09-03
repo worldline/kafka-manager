@@ -1,0 +1,40 @@
+<div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <a [routerLink]="['/']" class="h1">{{ 'common.webapp.title' | translate }}</a>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">{{ 'login.headline' | translate }}</p>
+
+            <form role="form" [formGroup]="loginForm" (ngSubmit)="login()">
+                <div class="input-group mb-3">
+                    <input formControlName="username" type="text" class="form-control" placeholder="{{ 'login.username' | translate }}" />
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input formControlName="password" type="password" class="form-control" placeholder="{{ 'login.password' | translate }}" />
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">{{ 'login.buttons.login' | translate }}</button>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>

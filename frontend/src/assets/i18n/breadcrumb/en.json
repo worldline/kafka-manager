@@ -1,0 +1,45 @@
+{
+    "breadcrumb": {
+        "home": "Home",
+        "dashboard": "Dashboard",
+        "brokers": {
+            "list": "Brokers",
+            "settings": "Update Configuration"
+        },
+        "monitoring": "Monitoring",
+        "cluster": {
+            "home": "Cluster",
+            "detail": "Cluster edition",
+            "add": "Cluster creation"
+        },
+        "connect": {
+            "dashboard": "Connectors",
+            "add-connector": "Add connector",
+            "edit-connector": "Edit connector",
+            "connector-detail": "Connector"
+        },
+        "consumerGroups": {
+            "list": "Consumer groups",
+            "detail": "Consumer groups",
+            "reset": "Reset offsets"
+        },
+        "topics": {
+            "detail": "Topic",
+            "list": "Topics",
+            "create": "Creation",
+            "settings": "Edit configuration",
+            "partitions": {
+                "add": "Partition creation",
+                "reassign": "Edit partition"
+            },
+            "metrics": "Mesures",
+            "add": "Topic creation"
+        },
+        "messages": {
+            "read": "Read messages"
+        },
+        "contacts": {
+            "list": "Contacts"
+        }
+    }
+}

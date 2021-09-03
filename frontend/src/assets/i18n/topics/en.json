@@ -1,0 +1,178 @@
+{
+    "topics": {
+        "reassignPartitions": {
+            "title": "Partitions reassignment",
+            "messages": {
+                "success": {
+                    "title": "Partitions reassignment",
+                    "text": "The partitions of topic {{topicName}} jave been reassigned"
+                },
+                "error": {
+                    "title": "Partitions ",
+                    "text": "The partitions reassignment has failed"
+                }
+            },
+            "form": {
+                "table": {
+                    "columns": {
+                        "partition": "Partition ID",
+                        "leader": {
+                            "label": "Leader",
+                            "placeholder": "Choose a leader"
+                        },
+                        "replicas": {
+                            "label": "Replications",
+                            "placeholder": "Select replications"
+                        }
+                    }
+                }
+            },
+            "partitionNumber": "Partition #{{partition}}"
+        },
+        "addPartitions": {
+            "title": "Add partitions",
+            "messages": {
+                "success": {
+                    "title": "Add partitions",
+                    "text": "Partitions have been added to the topic {{topicName}}"
+                },
+                "error": {
+                    "title": "Add partitions",
+                    "text": "The partitions update has failed"
+                }
+            },
+            "form": {
+                "buttons": {
+                    "save": "Add"
+                },
+                "topicName": {
+                    "label": "Topic name"
+                },
+                "nbPartitions": {
+                    "label": "Number of partitions (current : {{nbPartitions}})",
+                    "placeholder": "Number of partitions to add"
+                },
+                "brokers": {
+                    "label": "Brokers list which the partitions will be linked"
+                }
+            }
+        },
+        "details": {
+            "delete": {
+                "confirm": "Do you want to delete this topic ?",
+                "messages": {
+                    "success": {
+                        "title": "Delete topic",
+                        "text": "The topic {{topicName}} has been deleted"
+                    },
+                    "error": {
+                        "title": "Delete topic",
+                        "text": "The action has failed"
+                    }
+                }
+            },
+            "label": {
+                "brokersLeaderSpread": "Brokers leader spread",
+                "brokersSkewed": "Brokers skewed",
+                "brokersSpread": "Brokers spread",
+                "brokersUnderReplicated": "Brokers under replicated",
+                "consumerGroups": "Consumer group list",
+                "endOffset": "End offset",
+                "isr": "In Sync Replicas",
+                "keyData": "Important data",
+                "lag": "Topic lag",
+                "leader": "Leader",
+                "nbBrokerForTopic": "Number of brokers",
+                "nbPartitions": "Number of partitions",
+                "replicationFactor": "Replication factor",
+                "topicNotReplicated": "The data in this topic aren't replicated",
+                "partition": "# Partition",
+                "partitions": "Partitions",
+                "preferLeader": "Favorite leader",
+                "preferredReplicas": "Favorite replica",
+                "replicas": "Replicas",
+                "summary": "Resume",
+                "sumPartitionOffset": "Offsets sum",
+                "totalNumberOfBrokers": "Total number of brokers",
+                "underReplicate": "In replication"
+            },
+            "buttons": {
+                "updateSettings": "Update the configuration",
+                "addPartition": "Add partitions",
+                "reassignPartition": "Reassign partitions",
+                "delete": "Delete topic",
+                "metrics": "Charts"
+            }
+        },
+        "create": {
+            "messages": {
+                "success": {
+                    "title": "Create topic",
+                    "text": "The topic {{topicName}} has been created"
+                },
+                "error": {
+                    "title": "Create topic",
+                    "text": "The action has failed"
+                }
+            },
+            "form": {
+                "buttons": {
+                    "save": "Save"
+                },
+                "name": {
+                    "label": "Name",
+                    "placeholder": "Topic name"
+                },
+                "nbPartitions": {
+                    "label": "Number of partitions",
+                    "placeholder": "Number of partitions"
+                },
+                "replicationFactor": {
+                    "label": "Replication factor",
+                    "placeholder": "Replication factor"
+                },
+                "retentionTime": {
+                    "label": "Retention time",
+                    "placeholder": "Retention time in ms"
+                },
+                "retentionBytes": {
+                    "label": "Retention bytes",
+                    "placeholder": "Retention bytes"
+                }
+            }
+        },
+        "list": {
+            "title": "Topics Information",
+            "buttons": {
+                "create": "Create topic"
+            },
+            "table": {
+                "title": "Available topics",
+                "columns": {
+                    "name": "Name",
+                    "nbBrokers": "Number of broker",
+                    "nbSkewedBrokers": "Number of skewed broker",
+                    "nbPartitions": "Number of partition",
+                    "replicationFactor": "Replication factor",
+                    "nbUnderReplications": "Number in replication"
+                }
+            }
+        },
+        "settings-edit": {
+            "title": "Topic configuration",
+            "messages": {
+                "success": {
+                    "title": "Update topic",
+                    "text": "The topic {{topicName}} has been updated"
+                },
+                "error": {
+                    "title": "Update topic",
+                    "text": "The update topic {{topicName}} has failed"
+                }
+            }
+        },
+        "modal": {
+            "delete-content": "Are you sure to delete this topic ?"
+        }
+    }
+}

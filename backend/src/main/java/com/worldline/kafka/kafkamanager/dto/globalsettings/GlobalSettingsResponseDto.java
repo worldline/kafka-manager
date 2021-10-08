@@ -22,4 +22,6 @@ public class GlobalSettingsResponseDto implements Serializable {
 
 	private boolean enableKafkaConnect;
 
+	private boolean enableMessageViewer; 
+
 }

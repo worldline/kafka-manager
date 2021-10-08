@@ -31,6 +31,7 @@ import { ConnectorResolver } from '@resolvers/connector.resolver';
 import { LoginComponent } from '@components/login/login.component';
 import { AuthenticatedComponent } from '@components/auth/authenticated.component';
 import { AuthGuard } from '@app/guard/auth.guard';
+import { MessageViewerGuard } from '@app/guard/message-viewer.guard';
 
 const routes: Routes = [
     {
@@ -195,6 +196,7 @@ const routes: Routes = [
                                     title: 'messages.title',
                                     breadcrumb: 'breadcrumb.messages.read'
                                 },
+                                canActivate: [MessageViewerGuard]
                             },
                             {
                                 path: 'connect',

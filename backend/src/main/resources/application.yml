@@ -35,6 +35,7 @@ database.enable: false
 elasticsearch.enable: false
 kafka-connect.enable: false
 monitoring.enable: true
+message-viewer.enable: true
 
 # Authentication conf
 authentication:

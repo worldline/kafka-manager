@@ -46,15 +46,17 @@
                             <p>{{ 'side-menu.consumerGroups' | translate }}</p>
                         </a>
                     </li>
-                    <li class="nav-header">
-                        {{ 'messages.information' | translate }}
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" (click)="onRedirectKakfa('messages')">
-                            <i class="nav-icon fas fa-comments"></i>
-                            <p>{{ 'side-menu.messages' | translate }}</p>
-                        </a>
-                    </li>
+                    <ng-container *ngIf="settings?.enableMessageViewer">
+                        <li class="nav-header">
+                            {{ 'messages.information' | translate }}
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" (click)="onRedirectKakfa('messages')">
+                                <i class="nav-icon fas fa-comments"></i>
+                                <p>{{ 'side-menu.messages' | translate }}</p>
+                            </a>
+                        </li>
+                    </ng-container>
                 </ng-container>
                 <ng-container *ngIf="selectedCluster && settings?.enableKafkaConnect && selectedCluster.kafkaConnectAddr">
                     <li class="nav-header">

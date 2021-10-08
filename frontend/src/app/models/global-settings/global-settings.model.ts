@@ -5,5 +5,6 @@ export class GlobalSettings {
   enableMetrics: boolean;
   enableMonitoring: boolean;
   enableKafkaConnect: boolean;
+  enableMessageViewer: boolean;
  
 }

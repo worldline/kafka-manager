@@ -26,16 +26,20 @@ public class GlobalSettingsController {
 
 	private boolean enableKafkaConnect;
 
+	private boolean enableMessageViewer;
+
 	@Autowired
 	public GlobalSettingsController(@Value("${database.enable}") boolean enableDatabase,
 			@Value("${elasticsearch.enable}") boolean enableElastic, @Value("${metrics.enable}") boolean enableMetrics,
 			@Value("${monitoring.enable}") boolean enableMonitoring,
-			@Value("${kafka-connect.enable}") boolean enableKafkaConnect) {
+			@Value("${kafka-connect.enable}") boolean enableKafkaConnect,
+			@Value("${message-viewer.enable}") boolean enableMessageViewer) {
 		this.enableDatabase = enableDatabase;
 		this.enableElastic = enableElastic;
 		this.enableMetrics = enableMetrics;
 		this.enableMonitoring = enableMonitoring;
 		this.enableKafkaConnect = enableKafkaConnect;
+		this.enableMessageViewer = enableMessageViewer;
 	}
 
 	@GetMapping
@@ -46,6 +50,7 @@ public class GlobalSettingsController {
 		response.setEnableMetrics(enableMetrics);
 		response.setEnableMonitoring(enableMonitoring);
 		response.setEnableKafkaConnect(enableKafkaConnect);
+		response.setEnableMessageViewer(enableMessageViewer); 
 		return ResponseEntity.ok(response);
 	}
 

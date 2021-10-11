@@ -45,7 +45,8 @@ docker run -d --name kafka-manager -p 8001:8001 -v /tmp/kafka-manager:/srv/log -
 * __-Ddatabase.enable__ = false
 * __-Dcluster.name__ = "_YOUR_CLUSTER_NAME_"
 * __-Dcluster.kafkaVersion__ = "_YOUR_KAFKA_VERSION_" (Optional)
-* __-Dcluster.zkAddr__ = "_YOUR_ZOOKEEPER_ADDR_"
+* __-Dcluster.zkAddr__ = "_YOUR_ZOOKEEPER_ADDR_WITH_PORT"
+* __-Dcluster.kafkaConnectAddr__ = "_YOUR_KAFKA_CONNECT_ADDR_"
 * __-Dcluster.brokerAddrs[X].address__ = "_YOUR_BROKER_ADDR_"
 * __-Dcluster.brokerAddrs[X].kafkaPort__ = "_YOUR_BROKER_PORT_"
 * __-Dcluster.brokerAddrs[X].jmxPort__ = "_YOUR_BROKER_JMX_PORT_"
@@ -74,7 +75,7 @@ Three authenticiation modes are supported:
 
 #### InMemory auth
 
-* __authentication.in-memory.enabled__=false
+* __authentication.in-memory.enabled__=true
 * __authentication.in-memory.userLogin__= "user"
 * __authentication.in-memory.userPasswordHash__= "_USER_BCRYPT_HASH_PWD_"
 * __authentication.in-memory.adminLogin__= "admin"

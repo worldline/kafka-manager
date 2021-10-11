@@ -28,6 +28,8 @@ public class AppConfiguration {
 
 	private String kafkaVersion;
 
+	private String kafkaConnectAddr;
+
 	public Cluster getCluster() {
 		Cluster cluster = new Cluster();
 
@@ -36,6 +38,7 @@ public class AppConfiguration {
 		cluster.setZkAddr(this.zkAddr);
 		cluster.setBrokerAddrs(brokerAddrs);
 		cluster.setKafkaVersion(this.kafkaVersion);
+		cluster.setKafkaConnectAddr(this.kafkaConnectAddr);
 
 		return cluster;
 	}

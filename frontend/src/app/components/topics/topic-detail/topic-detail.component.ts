@@ -11,104 +11,107 @@ import { RatioCardIndicator } from '@models/card-indicator/ratio-card-indicator.
 import { SimpleCardIndicator } from '@models/card-indicator/simple-card-indicator.model';
 
 @Component({
-    selector: 'app-topic-detail',
-    templateUrl: './topic-detail.component.html',
-    styleUrls: ['./topic-detail.component.css']
+  selector: 'app-topic-detail',
+  templateUrl: './topic-detail.component.html',
+  styleUrls: ['./topic-detail.component.css']
 })
 export class TopicDetailComponent implements OnInit {
 
-    deleteModalState: boolean = false;
-    topic: Topic;
-    consumerGroupMembers: ConsumerMember[];
-    topicLag: number;
-    cardIndicators: RatioCardIndicator[];
+  deleteModalState: boolean = false;
+  topic: Topic;
+  consumerGroupMembers: ConsumerMember[];
+  topicLag: number;
+  cardIndicators: RatioCardIndicator[];
 
-    constructor(private route: ActivatedRoute,
-                private router: Router,
-                private toastr: ToastrService,
-                private topicService: TopicService,
-                private consumerGroupService: ConsumerGroupService,
-                public settings: GlobalSettingsService,
-                private translate: TranslateService) {
-    }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private toastr: ToastrService,
+    private topicService: TopicService,
+    private consumerGroupService: ConsumerGroupService,
+    public settings: GlobalSettingsService,
+    private translate: TranslateService) {
+  }
 
-    ngOnInit(): void {
-        this.topic = this.route.snapshot.data.topic;
-        const clusterId = this.route.snapshot.data.cluster.id;
-        this.consumerGroupService.findByTopic(clusterId, this.topic.name).subscribe(consumerGroups => {
-            let result = [];
-            consumerGroups.content.forEach(m => {
-                result = result.concat(m.members);
-            });
-            this.consumerGroupMembers = result;
-
-            // Compute topic lag if only one consumer exists
-            this.computeTopicLag();
+  ngOnInit(): void {
+    this.topic = this.route.snapshot.data.topic;
+    const clusterId = this.route.snapshot.data.cluster.id;
+    this.consumerGroupService.findByTopic(clusterId, this.topic.name).subscribe(consumerGroups => {
+      let result = [];
+      consumerGroups.content
+        .map(m => m.members)
+        .forEach(members => {
+          result = result.concat(members);
         });
+      result = result.filter(member => member.topicPartitions.some(tp => tp.name === this.topic.name));
+      this.consumerGroupMembers = result;
 
-        this.cardIndicators = [
-            new RatioCardIndicator(null, "topics.details.label.brokersSpread", this.indiceComputation(this.topic.brokersSpread, 'asc'), true, this.topic.brokersSpread.toString(), this.ratioComputation(this.topic.brokersSpread)),
-            new RatioCardIndicator(null, "topics.details.label.brokersSkewed", this.indiceComputation(this.topic.brokersSkewed, 'desc'), true, this.topic.brokersSkewed.toString(), this.ratioComputation(this.topic.brokersSkewed)),
-            new RatioCardIndicator(null, "topics.details.label.brokersUnderReplicated", this.indiceComputation(this.topic.nbUnderReplication, 'desc'), true, this.topic.nbUnderReplication.toString(), this.ratioComputation(this.topic.nbUnderReplication))
-        ];
-    }
+      // Compute topic lag if only one consumer exists
+      this.computeTopicLag();
+    });
 
-    computeTopicLag() {
-        if (this.consumerGroupMembers && this.consumerGroupMembers.length === 1) {
-            let topicEnd = 0, topicCurrent = 0;
-            this.consumerGroupMembers[0].topicPartitions.filter(partition => {
-                return partition.offsets && partition.offsets.current >= 0;
-            }).forEach(partition => {
-                topicEnd += partition.offsets.end;
-                topicCurrent += partition.offsets.current;
-            });
-            if (topicEnd > 0) {
-                this.topicLag = topicEnd - topicCurrent;
-            }
-        }
-    }
+    this.cardIndicators = [
+      new RatioCardIndicator(null, "topics.details.label.brokersSpread", this.indiceComputation(this.topic.brokersSpread, 'asc'), true, this.topic.brokersSpread.toString(), this.ratioComputation(this.topic.brokersSpread)),
+      new RatioCardIndicator(null, "topics.details.label.brokersSkewed", this.indiceComputation(this.topic.brokersSkewed, 'desc'), true, this.topic.brokersSkewed.toString(), this.ratioComputation(this.topic.brokersSkewed)),
+      new RatioCardIndicator(null, "topics.details.label.brokersUnderReplicated", this.indiceComputation(this.topic.nbUnderReplication, 'desc'), true, this.topic.nbUnderReplication.toString(), this.ratioComputation(this.topic.nbUnderReplication))
+    ];
+  }
 
-    deleteTopic() {
-        const clusterId = this.route.snapshot.data.cluster.id;
-        this.topicService.delete(clusterId, this.topic.name).subscribe(
-            () => {
-                this.toastr.success(this.translate.instant("topics.details.delete.messages.success.text", {topicName: this.topic.name}), this.translate.instant("topics.details.delete.messages.success.title"));
-                this.router.navigateByUrl(`/clusters/${clusterId}/topics`);
-            }, () => {
-                this.toastr.error(this.translate.instant("topics.details.delete.messages.error.text"), this.translate.instant("topics.details.delete.messages.error.title"));
-            }
-        );
+  computeTopicLag() {
+    if (this.consumerGroupMembers && this.consumerGroupMembers.length === 1) {
+      let topicEnd = 0, topicCurrent = 0;
+      this.consumerGroupMembers[0].topicPartitions.filter(partition => {
+        return partition.offsets && partition.offsets.current >= 0;
+      }).forEach(partition => {
+        topicEnd += partition.offsets.end;
+        topicCurrent += partition.offsets.current;
+      });
+      if (topicEnd > 0) {
+        this.topicLag = topicEnd - topicCurrent;
+      }
     }
+  }
 
-    goToUpdateSettings() {
-        this.router.navigateByUrl(`/clusters/${this.route.snapshot.data.cluster.id}/topics/${this.topic.name}/settings/edit`);
-    }
+  deleteTopic() {
+    const clusterId = this.route.snapshot.data.cluster.id;
+    this.topicService.delete(clusterId, this.topic.name).subscribe(
+      () => {
+        this.toastr.success(this.translate.instant("topics.details.delete.messages.success.text", { topicName: this.topic.name }), this.translate.instant("topics.details.delete.messages.success.title"));
+        this.router.navigateByUrl(`/clusters/${clusterId}/topics`);
+      }, () => {
+        this.toastr.error(this.translate.instant("topics.details.delete.messages.error.text"), this.translate.instant("topics.details.delete.messages.error.title"));
+      }
+    );
+  }
 
-    goToAddPartition() {
-        this.router.navigateByUrl(`/clusters/${this.route.snapshot.data.cluster.id}/topics/${this.topic.name}/add-partitions`);
-    }
+  goToUpdateSettings() {
+    this.router.navigateByUrl(`/clusters/${this.route.snapshot.data.cluster.id}/topics/${this.topic.name}/settings/edit`);
+  }
 
-    goToReassignPartition() {
-        this.router.navigateByUrl(`/clusters/${this.route.snapshot.data.cluster.id}/topics/${this.topic.name}/reassign-partitions`);
-    }
+  goToAddPartition() {
+    this.router.navigateByUrl(`/clusters/${this.route.snapshot.data.cluster.id}/topics/${this.topic.name}/add-partitions`);
+  }
 
-    goToTopics() {
-        this.router.navigateByUrl(`/clusters/${this.route.snapshot.data.cluster.id}/topics`);
-    }
+  goToReassignPartition() {
+    this.router.navigateByUrl(`/clusters/${this.route.snapshot.data.cluster.id}/topics/${this.topic.name}/reassign-partitions`);
+  }
 
-    computeGauge(value: number) {
-        return value * 1.8;
-    }
+  goToTopics() {
+    this.router.navigateByUrl(`/clusters/${this.route.snapshot.data.cluster.id}/topics`);
+  }
 
-    ratioComputation(value: number): string {
-        return this.computeGauge(value) + "deg";
-    }
+  computeGauge(value: number) {
+    return value * 1.8;
+  }
 
-    indiceComputation(value: number, order: String): number {
-        const result = this.computeGauge(value);
-        if(result < 33)  return (order === "asc") ? 2 : 0;
-        if(result < 66)  return 1;
-        return (order === "asc") ? 0 : 2;
-    }
+  ratioComputation(value: number): string {
+    return this.computeGauge(value) + "deg";
+  }
+
+  indiceComputation(value: number, order: String): number {
+    const result = this.computeGauge(value);
+    if (result < 33) return (order === "asc") ? 2 : 0;
+    if (result < 66) return 1;
+    return (order === "asc") ? 0 : 2;
+  }
 
 }

@@ -36,7 +36,7 @@ export class ConnectDashboardComponent implements OnInit {
             this.connectors = connectors.content.sort((a,b) => a.name.localeCompare(b.name))
             this.connectors.forEach(connector => {
                 // Manage indicators
-                let topic = null;
+                let topic = this.getTopic(connector);
                 if (connector.type === 'sink') {
                     topic = connector.config['topics'];
                     this.sinkConnectors++;
@@ -66,6 +66,14 @@ export class ConnectDashboardComponent implements OnInit {
 
     goToCreateConnector() {
         this.router.navigateByUrl(`/clusters/${this.clusterId}/connect/add-connector`);
+    }
+
+    getTopic(connector) {
+        const config = connector.config;
+        const found = Object.keys(config).find(c => {
+            return c.split('.').some(d => d.includes('topic'));
+        });
+        return found ? config[found] : null;
     }
 
 }

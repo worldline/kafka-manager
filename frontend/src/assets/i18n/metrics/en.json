@@ -3,7 +3,8 @@
     "topics": {
       "title": "Monitoring",
       "heat": {
-        "title": "Heat map"
+        "title": "Heat map",
+        "notEmpty": "Display topic without lag"
       }
     },
     "topic": {

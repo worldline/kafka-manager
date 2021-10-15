@@ -33,8 +33,9 @@ export class TopicsMetricsComponent implements OnInit {
         });
     }
 
-    computeHeatData(data: Metric[]) {
-        const result = data.filter(d => d.offsets != null).map(item => {
+    computeHeatData(data: Metric[], displayEmpty: boolean = false) {
+        // Map data
+        let result = data.filter(d => d.offsets != null).map(item => {
             let lag = 0;
             item.offsets.filter(offset => offset.currentOffset >= 0).forEach(offset => {
                 lag += (offset.endOffset - offset.currentOffset);
@@ -45,6 +46,20 @@ export class TopicsMetricsComponent implements OnInit {
                 value: lag
             };
         });
+
+        // Filter topic
+        if (!displayEmpty) {
+            result.map(d => d.topic).filter((value, index, self) => self.indexOf(value) === index)
+                .filter(topic => {
+                    const lag = result.filter(d => d.topic === topic).map(d => d.value).reduce((a, b) => a + b, 0);
+                    return lag === 0;
+                })
+                .forEach(topic => {
+                    result = result.filter(d => d.topic !== topic);
+                });
+        }
+
+        // Map heat
         this.heatData = {
             headers: {
                 x: {
@@ -64,4 +79,8 @@ export class TopicsMetricsComponent implements OnInit {
         this.router.navigateByUrl(`/clusters/${this.clusterId}/topics/${event.topic}`);
     }
 
+    notEmptyHeat(event) {
+        const value = event.currentTarget.checked;
+        this.computeHeatData(this.data, value);
+    }
 }

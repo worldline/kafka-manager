@@ -41,7 +41,7 @@ export class ConsumerGroupResetComponent implements OnInit {
             });
         });
         this.topicService.list(this.clusterId).subscribe(topicPage => {
-            this.topics = topicPage.content.filter(t => topics.includes(t.name));
+            this.topics = topicPage.content//.filter(t => topics.includes(t.name));
         });
     }
 

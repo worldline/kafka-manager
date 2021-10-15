@@ -35,9 +35,7 @@ export class ChartHeatComponent extends AbstractChartComponent {
         chart.data = this.mapData(am4core, this.data);
 
         // Update height
-        const yType = this.data.headers.y.column;
-        const uniqueTypes = this.data.data.map(d => d[yType]).filter((value, index, self) => self.indexOf(value) === index);
-        this.heightStyle = (50 * uniqueTypes.length + 100) + 'px';
+        this.updateHeight();
 
         // Create axes
         let xAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -117,12 +115,18 @@ export class ChartHeatComponent extends AbstractChartComponent {
         return chart;
     }
 
+    updateHeight() {
+        const yType = this.data.headers.y.column;
+        const uniqueTypes = this.data.data.map(d => d[yType]).filter((value, index, self) => self.indexOf(value) === index);
+        this.heightStyle = (50 * uniqueTypes.length + 100) + 'px';
+    }
+
     mapData(am4core, data) {
         return data.data;
     }
 
     updateSeries(am4core, am4charts, chart) {
-        chart.series.clear();
+        this.updateHeight();
     }
 
 }

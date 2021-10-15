@@ -7,6 +7,16 @@
                 <h3 class="card-title">{{ 'metrics.topics.heat.title' | translate }}</h3>
             </div>
             <div class="card-body">
+                <div>
+                    <form role="form">
+                        <div class="form-group">
+                            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                <input class="custom-control-input" type="checkbox" id="notEmptyHeat" (change)="notEmptyHeat($event)">
+                                <label for="notEmptyHeat" ng-disabled="heatData" class="custom-control-label">{{ 'metrics.topics.heat.notEmpty' | translate }}</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <app-chart-heat *ngIf="heatData" (yClick)="goToTopic($event)" [data]="heatData"></app-chart-heat>
             </div>
             <!-- /.card-body -->

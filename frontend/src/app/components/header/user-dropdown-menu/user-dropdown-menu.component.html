@@ -1,11 +1,11 @@
 <li class="nav-item dropdown user-menu">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" (click)="toggleDropdownMenu()" title="{{ user.firstName }} {{ user.lastName }}">
-        <img appGravatar [email]="user.email ? user.email : user.firstName" [size]="26" class="img-circle elevation-2">
+    <a class="nav-link dropdown-toggle user-menu" data-toggle="dropdown" (click)="toggleDropdownMenu()" title="{{ user.firstName }} {{ user.lastName }}">
+        <img src="assets/img/user-filled.png" class="img-circle elevation-2">
     </a>
     <ul #dropdownMenu class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <!-- User image -->
         <li class="user-header bg-gray-dark">
-            <img appGravatar [email]="user.email ? user.email : user.firstName" class="img-circle elevation-2" alt="{{ user.firstName }} {{ user.lastName }}">
+            <img src="assets/img/user.png" class="img-circle elevation-2">
             <p *ngIf="user.lastName">
                 {{ user.firstName }} {{ user.lastName }} - {{ user.fonction }}
                 <small *ngIf="user.creationDate">Member since {{ helperService.convertDate(user.creationDate) }}</small>

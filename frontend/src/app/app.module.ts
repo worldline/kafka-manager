@@ -19,7 +19,6 @@ import { MenuSidebarComponent } from '@components/menu-sidebar/menu-sidebar.comp
 import { DatePipe } from '@angular/common';
 import { UserDropdownMenuComponent } from '@components/header/user-dropdown-menu/user-dropdown-menu.component';
 import { SettingsComponent } from '@components/settings/settings.component';
-import { GravatarDirective } from '@directives/gravatar.directive';
 import { CardActionsDirective } from '@directives/card-actions.directive';
 import { BrokersComponent } from '@components/brokers/brokers.component';
 import { TopicsComponent } from '@components/topics/topics.component';
@@ -87,7 +86,6 @@ export function configurationInit(config: GlobalSettingsService) {
         LanguageDropdownMenuComponent,
         UserDropdownMenuComponent,
         SettingsComponent,
-        GravatarDirective,
         CardActionsDirective,
         EditSettingsComponent,
         HasRoleDirective,

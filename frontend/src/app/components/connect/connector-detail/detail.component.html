@@ -44,7 +44,7 @@
                             <dd>{{ connector.config['connector.class'] | titlecase }}</dd>
 
                             <dt>{{ 'connect.connector.topic' | translate }}</dt>
-                            <dd><a [routerLink]="[routeToTopic,connector.config['topic'] || connector.config['topics']]">{{ connector.config['topic'] || connector.config['topics'] | titlecase }}</a></dd>
+                            <dd><a [routerLink]="[routeToTopic,getTopic(connector)]">{{ getTopic(connector) | titlecase }}</a></dd>
                         </dl>
                     </div>
                 </div>

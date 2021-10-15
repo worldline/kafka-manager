@@ -74,7 +74,7 @@
                         <tr *ngFor="let connector of connectors">
                             <td><a [routerLink]="connector.name">{{ connector.name }}</a></td>
                             <td>{{ connector.type }}</td>
-                            <td><a [routerLink]="[routeToTopic,connector.config.topic || connector.config.topics]">{{ connector.config.topic || connector.config.topics }}</a></td>
+                            <td><a [routerLink]="[routeToTopic,getTopic(connector)]">{{ getTopic(connector) }}</a></td>
                             <td><app-check [check]="connector.status === 'UP'"></app-check></td>
                         </tr>
                     </tbody>

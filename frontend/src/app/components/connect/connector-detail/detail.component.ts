@@ -82,4 +82,12 @@ export class ConnectDetailConnectorComponent implements OnInit {
         this.traceModalState = true;
     }
 
+    getTopic(connector) {
+        const config = connector.config;
+        const found = Object.keys(config).find(c => {
+            return c.split('.').some(d => d.includes('topic'));
+        });
+        return found ? config[found] : null;
+    }
+
 }

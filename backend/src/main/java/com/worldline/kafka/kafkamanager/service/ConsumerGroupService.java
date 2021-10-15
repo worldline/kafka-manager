@@ -94,6 +94,7 @@ public class ConsumerGroupService {
 			// Fetch all consumer groups
 			ConsumerGroupDescribeSearchDto search = new ConsumerGroupDescribeSearchDto();
 			search.setGroupIds(groupIds);
+			search.setOffsets(true);
 			List<ConsumerGroupDescriptionDto> consumerGroups = getConsumerGroups(clusterId, search);
 
 			// Read the list of consumer groups

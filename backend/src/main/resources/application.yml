@@ -118,3 +118,5 @@ jmx:
         - OneMinuteRate
         - FiveMinuteRate
         - FifteenMinuteRate
+
+logging.level.org.apache.kafka.clients.consumer: error

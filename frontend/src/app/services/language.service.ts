@@ -32,8 +32,27 @@ export class LanguageService {
     * @return the current language
     */
     current(): Language {
-        const language = this.languages.find(l => l.name == localStorage.getItem("lang"))
-        return (language) ? language : this.languages[0]
+        let language : Language;
+
+        // Use language store in session storage
+        if (localStorage.getItem("lang") !== null) {
+            language = this.languages.find(l => l.name == localStorage.getItem("lang"))
+        } 
+        
+        // Use default language
+        if (!language) {
+            language = this.languages.find(l => l.name == this.translate.defaultLang)
+        }
+
+        // Use first available language
+        if (!language) {
+            language = this.languages[0]
+        }
+
+        // Apply Language
+        this.store(language)
+        
+        return language
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.worldline.kafka.kafkamanager.mapper;
 
 import java.nio.charset.StandardCharsets;
+import java.util.stream.StreamSupport;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.header.Headers;
@@ -61,8 +62,9 @@ public class ConsumerRecordMapper {
 		// Set headers
 		Headers headers = rawRecord.headers();
 		if (headers != null) {
-			headers.forEach(
-					header -> record.addHeader(header.key(), new String(header.value(), StandardCharsets.UTF_8)));
+			StreamSupport.stream(headers.spliterator(), false)
+				.filter(h -> h.key() != null && h.value() != null)
+				.forEach(header -> record.addHeader(header.key(), new String(header.value(), StandardCharsets.UTF_8)));
 		}
 		return record;
 	}

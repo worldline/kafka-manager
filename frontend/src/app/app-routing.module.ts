@@ -273,15 +273,15 @@ const routes: Routes = [
                                         runGuardsAndResolvers: 'always',
                                         resolve: {
                                             topic: TopicResolver
+                                        },
+                                        data: {
+                                            title: 'topic-detail.title',
+                                            breadcrumb: 'breadcrumb.topics.detail'
                                         },                                        
                                         children: [
                                             {
                                                 path: '',
-                                                component: TopicDetailComponent,
-                                                data: {
-                                                    title: 'topic-detail.title',
-                                                    breadcrumb: 'breadcrumb.topics.detail'
-                                                }
+                                                component: TopicDetailComponent
                                             },
                                             {
                                                 path: 'metrics',

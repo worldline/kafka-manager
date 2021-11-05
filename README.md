@@ -109,9 +109,17 @@ Three authenticiation modes are supported:
 
 * __-Dkafka-connect.enable__ = true
 
+## License
+
+This project is distributed under Apache 2.0 license.
+
+Kafka Manager uses the following external libraries :
+* [AdminLTE](https://github.com/ColorlibHQ/AdminLTE#License) under MIT license
+* [AmCharts4](https://github.com/amcharts/amcharts4#license) covered by a freeware license
+
 ## Credits
 
-Original project from FS Lab 2021
+Original project from Worldline FS Lab 2021
 
 ### Authors
 

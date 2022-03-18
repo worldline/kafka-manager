@@ -11,6 +11,8 @@ import { Pageable } from "@models/pageable.model";
 export class TopicsComponent implements OnInit {
 
     private clusterId: string;
+    private searchId;
+    textSearch: string = '';
     topics: Topic[];
     pageable: Pageable = new Pageable();
 
@@ -23,13 +25,10 @@ export class TopicsComponent implements OnInit {
         this.route.paramMap.subscribe(params => {
             if (this.route.snapshot.queryParamMap != null) {
                 this.pageable.currentPage = this.route.snapshot.queryParamMap['params'].page ? this.route.snapshot.queryParamMap['params'].page : 1;
+                this.textSearch = this.route.snapshot.queryParamMap['params'].search ? this.route.snapshot.queryParamMap['params'].search : '';
             }
             this.clusterId = params.get('clusterId');
-            this.topicService.list(this.clusterId, false, this.pageable)
-                .subscribe(topicPage => {
-                        this.topics = topicPage.content;
-                        this.pageable = Pageable.readPage(topicPage);
-                    });
+            this.searchTopic();
         });
     }
 
@@ -39,7 +38,25 @@ export class TopicsComponent implements OnInit {
 
     pageChange(newPage: number) {
         this.pageable.currentPage = newPage;
-        this.router.navigate([`/clusters/${this.clusterId}/topics`], { queryParams: { page: newPage } });
+        this.router.navigate([`/clusters/${this.clusterId}/topics`], { queryParams: { page: newPage, search: this.textSearch } });
     }
 
+    searchTopic() {
+        this.topicService.list(this.clusterId, false, this.textSearch, this.pageable)
+            .subscribe(topicPage => {
+                    this.topics = topicPage.content;
+                    this.pageable = Pageable.readPage(topicPage);
+                });
+    }
+
+    search(text) {
+        if (this.searchId) {
+            clearTimeout(this.searchId);
+        }
+        this.searchId = setTimeout(() => {
+            this.textSearch = text;
+            this.pageable.currentPage = 1;
+            this.searchTopic();
+        }, 300);
+    }
 }

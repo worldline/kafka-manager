@@ -8,8 +8,20 @@
             </div>
         </div>
         <div class="card card-dark">
-            <div class="card-header">
-                <h3 class="card-title">{{ 'topics.list.table.title' | translate }}</h3>
+            <div class="card-header d-flex p-0">
+                <h3 class="card-title p-3">{{ 'topics.list.table.title' | translate }}</h3>
+                <ul class="nav nav-pills ml-auto pt-2">
+                    <li class="nav-item mr-2 pt-1">
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" [value]="textSearch" (input)="search($event.target.value)">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div class="card-body p-0 table-responsive">
                 <table class="table table-hover table-striped">

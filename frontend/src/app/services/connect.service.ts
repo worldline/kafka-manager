@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { Page } from '@models/page.model';
@@ -8,6 +8,7 @@ import { CreateConnector } from '@models/connect/create-connector.model';
 import { UpdateConnector } from '@models/connect/update-connector.model';
 import { ValidatePluginRequest } from '@models/connect/validate-plugin-request.model';
 import { ValidatePluginResponse } from '@models/connect/validate-plugin-response.model';
+import { Pageable } from "@models/pageable.model";
 
 @Injectable({
     providedIn: 'root'
@@ -24,8 +25,11 @@ export class ConnectService {
      *
      * @return http call observable
      */
-    connectors(clusterId: string): Observable<Page<Connector>> {
-        return this.httpClient.get<Page<Connector>>(`/api/clusters/${clusterId}/kafka-connect/connectors`);
+    connectors(clusterId: string, pageable: Pageable = null): Observable<Page<Connector>> {
+        const httpParams = new HttpParams()
+            .append('size', pageable != null ? String(pageable.itemsPerPage) : String(''))
+            .append('page', pageable != null ? String(pageable.currentPage - 1) : String(''));
+        return this.httpClient.get<Page<Connector>>(`/api/clusters/${clusterId}/kafka-connect/connectors`, {params: httpParams});
     }
 
     connector(clusterId: string, connectorId: string): Observable<Connector> {

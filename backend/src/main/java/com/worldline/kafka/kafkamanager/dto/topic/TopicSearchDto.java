@@ -13,4 +13,6 @@ public class TopicSearchDto implements Serializable {
 	private static final long serialVersionUID = -6541404060482297049L;
 
 	private boolean full;
+
+	private String topicName;
 }

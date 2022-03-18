@@ -2,17 +2,17 @@ package com.worldline.kafka.kafkamanager.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import com.worldline.kafka.kafkamanager.dto.consumergroups.ConsumerGroupDescribeSearchDto;
 import com.worldline.kafka.kafkamanager.dto.consumergroups.ConsumerGroupDescriptionDto;
@@ -49,6 +49,8 @@ public class MetricsService {
 
 	private MetricsStorage metricsStorage;
 
+	private boolean enableSchedule;
+
 	/**
 	 * Constructor.
 	 * 
@@ -57,15 +59,30 @@ public class MetricsService {
 	 * @param consumerGroupService the consumer group service
 	 * @param metricsStorage       the metrics storage
 	 * @param pageableService      the pageable service
+	 * @param enableSchedule       {@code true if the schedule is enable}
 	 */
 	@Autowired
 	public MetricsService(ZooKaMixService zooKaMixService, MetricsMapper metricsMapper,
-			ConsumerGroupService consumerGroupService, PageableService pageableService, MetricsStorage metricsStorage) {
+			ConsumerGroupService consumerGroupService, PageableService pageableService, MetricsStorage metricsStorage,
+			@Value("${metrics.schedule:true}") boolean enableSchedule) {
 		this.zooKaMixService = zooKaMixService;
 		this.metricsMapper = metricsMapper;
 		this.consumerGroupService = consumerGroupService;
 		this.pageableService = pageableService;
 		this.metricsStorage = metricsStorage;
+		this.enableSchedule = enableSchedule;
+	}
+
+	/**
+	 * Store metrics.
+	 */
+	@Scheduled(cron = "${metrics.cron-async-storage}")
+	public void storeMetrics() {
+		if (enableSchedule) {
+			log.debug("Start - Store all metrics");
+			this.storeAll();
+			log.debug("End - Store all metrics");
+		}
 	}
 
 	/**
@@ -98,19 +115,19 @@ public class MetricsService {
 		if (CollectionUtils.isEmpty(metrics)) {
 			return new LagMetricResponseDto(LocalDateTime.now(), clusterId, NO_METRIC);
 		}
-		
+
 		// Compute lag (returns the max lag of metrics)
 		long computedLag = metrics.stream().map(m -> computeLagByMetricOffsets(m.getOffsets())).reduce(0L, Long::max);
-		
+
 		return new LagMetricResponseDto(LocalDateTime.now(), clusterId, String.valueOf(computedLag));
 	}
 
 	/**
-	 * Returns the sum of lag for a MetricOffset list 
+	 * Returns the sum of lag for a MetricOffset list
 	 * 
-	 * @param offsets a MetricOffset list 
+	 * @param offsets a MetricOffset list
 	 * @return the sum of lag
- 	 */
+	 */
 	private long computeLagByMetricOffsets(List<MetricOffset> offsets) {
 		return offsets.stream().map(o -> o.getEndOffset() - o.getCurrentOffset()).reduce(0L, Long::sum);
 	}

@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.2</version>
+		<version>2.6.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -21,9 +21,11 @@
 		<common.bean.utils.version>1.9.4</common.bean.utils.version>
 		<java.version>11</java.version>
 		<jjwt.version>0.11.2</jjwt.version>
-		<kafka.cloud.version>3.1.2</kafka.cloud.version>
-		<zkclient.version>3.6.2</zkclient.version>
-		<feign.version>3.0.3</feign.version>
+		<kafka.cloud.version>3.2.2</kafka.cloud.version>
+		<zkclient.version>3.8.0</zkclient.version>
+		<feign.version>3.1.1</feign.version>
+		<liquibase.version>4.9.0</liquibase.version>
+		<common.io.version>2.11.0</common.io.version>
 	</properties>
 
 	<dependencies>
@@ -31,6 +33,7 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
+			<version>${liquibase.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -83,6 +86,12 @@
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-openfeign</artifactId>
 		    <version>${feign.version}</version>
+		    <exclusions>
+		    	<exclusion>
+		    		<groupId>commons-io</groupId>
+		    		<artifactId>commons-io</artifactId>
+		    	</exclusion>
+		    </exclusions>
 		</dependency>
 
 		<!-- QueryDsl -->
@@ -148,6 +157,11 @@
 		<dependency>
 			<groupId>org.codehaus.janino</groupId>
 			<artifactId>janino</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>${common.io.version}</version>
 		</dependency>
 
 		<!-- tests -->

@@ -1,14 +1,12 @@
 package com.worldline.kafka.kafkamanager.service;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.worldline.kafka.kafkamanager.dto.monitoring.MonitoringResponseDto;
@@ -82,7 +80,7 @@ public class MonitoringService {
 			.entrySet().stream()
 			.collect(Collectors.toMap(Map.Entry::getKey, e -> this.detectActivityTopic(e.getKey(), e.getValue())));
 
-		log.info(topicResults.toString());
+		log.debug(topicResults.toString());
 		
 		return Pair.of(
 			topicResults.entrySet().stream().allMatch(e -> e.getValue().getFirst()),
@@ -110,7 +108,7 @@ public class MonitoringService {
 			.entrySet().stream()
 			.collect(Collectors.toMap(Map.Entry::getKey, e -> this.detectActivityGroupId(e.getKey(), e.getValue())));
 
-		log.info(topicResults.toString());
+		log.debug(topicResults.toString());
 		
 		return Pair.of(
 			topicResults.entrySet().stream().allMatch(e -> e.getValue().getFirst()),

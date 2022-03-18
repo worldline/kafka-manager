@@ -71,7 +71,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let connector of connectors">
+                        <tr *ngFor="let connector of connectors | paginate: pageable">
                             <td><a [routerLink]="connector.name">{{ connector.name }}</a></td>
                             <td>{{ connector.type }}</td>
                             <td><a [routerLink]="[routeToTopic,getTopic(connector)]">{{ getTopic(connector) }}</a></td>
@@ -79,6 +79,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <pagination-controls *ngIf="pageable.hasPagination" (pageChange)="pageChange($event)" class="my-pagination"></pagination-controls>
             </div>
         </div>
     </div>

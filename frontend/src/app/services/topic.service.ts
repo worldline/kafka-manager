@@ -25,12 +25,15 @@ export class TopicService {
      *
      * @return http call observable
      */
-    list(clusterId: string, full: boolean = false, pageable: Pageable = null): Observable<Page<Topic>> {
-        const httpParams = new HttpParams()
+    list(clusterId: string, full: boolean = false, text: string = null, pageable: Pageable = null): Observable<Page<Topic>> {
+        let httpParams = new HttpParams()
             .append('sort', String('name'))
             .append('full', String(full))
             .append('size', pageable != null ? String(pageable.itemsPerPage) : String(''))
             .append('page', pageable != null ? String(pageable.currentPage - 1) : String(''));
+        if (text) {
+            httpParams = httpParams.append('topicName', String(text));
+        }
 
         return this.httpClient.get<Page<Topic>>(`/api/clusters/${clusterId}/topics`, {params: httpParams});
     }

@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.worldline.kafka.kafkamanager.dto.setting.ConfigurationUpdateDto;
 import com.worldline.kafka.kafkamanager.dto.topic.TopicAddPartitionDto;
@@ -81,6 +82,15 @@ public class TopicService {
 		try {
 			// Get topic name
 			Set<String> topicNames = zooKaMixAdmin.getTopicNames();
+
+			// Filter topic
+			if (StringUtils.hasText(request.getTopicName())) {
+				topicNames = topicNames.stream()
+						.filter(topic -> StringUtils.hasText(topic)
+								&& topic.toLowerCase().contains(request.getTopicName().toLowerCase()))
+						.collect(Collectors.toSet());
+			}
+
 			// Get topic description
 			Map<String, TopicDescription> topics = zooKaMixAdmin.getAdminClient().describeTopics(topicNames).all()
 					.get();

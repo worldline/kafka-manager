@@ -23,7 +23,20 @@ export class EditSettingsComponent implements OnInit {
     this.settingList = Object.keys(this.settings).sort();
     this.settingList.forEach(setting => {
       const currentSetting = this.resourceSettings.find(a => a.key == setting);
-      const formControl = new FormControl(currentSetting && currentSetting.value ? currentSetting.value : '');
+      let values: any = currentSetting && currentSetting.value ? currentSetting.value : '';
+      let formControl;
+
+      // Split if multiple values
+      if (this.settings[setting].multiple) {
+        if (values.includes(',')) {
+          values = values.split(',');
+        } else {
+          values = [values];
+        }
+      }
+
+      formControl = new FormControl(values);
+
       if (this.settings[setting] && this.settings[setting].readOnly) {
         formControl.disable();
       }
@@ -37,6 +50,9 @@ export class EditSettingsComponent implements OnInit {
 
   isNotDefault(key) {
     const entryValue = this.settingForm.controls[key] ? this.settingForm.controls[key].value : '';
+    if (Array.isArray(entryValue)) {
+      return entryValue && (entryValue.length > 1 || !entryValue.includes(this.settings[key].default));
+    }
     return entryValue && this.settings[key].default !== entryValue;
   }
 
@@ -70,7 +86,17 @@ export class EditSettingsComponent implements OnInit {
       if (formValue) {
         const currentSetting = this.resourceSettings.find(a => a.key == setting);
         if (!currentSetting || currentSetting.value !== formValue) {
-          updatedData.push(new Setting(setting, formValue));
+          // Manage multiple values
+          let valueToAdd;
+          if (Array.isArray(formValue)) {
+            valueToAdd = formValue.join(',');
+          } else {
+            valueToAdd = formValue;
+          }
+
+
+          // Add value
+          updatedData.push(new Setting(setting, valueToAdd));
         }
       }
     });

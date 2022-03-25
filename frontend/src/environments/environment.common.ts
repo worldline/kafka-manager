@@ -1487,6 +1487,7 @@ export const commonEnvironment = {
     topicSettingList: {
         'cleanup.policy': {
             'default': 'delete',
+            'multiple': true,
             'values': ['compact', 'delete']
         },
         'compression.type': {

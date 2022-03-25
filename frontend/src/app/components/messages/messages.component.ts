@@ -15,7 +15,7 @@ import {TranslateService} from '@ngx-translate/core';
 import * as cloneDeep from 'lodash/cloneDeep';
 import {ProducerMessage} from '@models/producer/producer-message.model';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { delay } from 'rxjs/operators';
+import { Pageable } from "@models/pageable.model";
 
 @Component({
     selector: 'app-messages',
@@ -60,10 +60,23 @@ export class MessagesComponent implements OnInit {
 
     ngOnInit(): void {
         const clusterId = this.route.snapshot.data.cluster.id;
-        this.topicService.list(clusterId, true).subscribe(topicPage => {
-            this.topics = topicPage.content;
-        });
+
+        // Get topics
+        this.topics = [];
+        this.getTopics(clusterId);
+
         this.refreshGroupId(true);
+    }
+
+    getTopics(clusterId: string, page: number = 1): void {
+        let pageable = new Pageable(page, 100);
+        this.topicService.list(clusterId, true, null, pageable).subscribe(topicPage => {
+            this.topics = this.topics.concat(topicPage.content);
+            this.topics.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+            if (!topicPage.last) {
+                this.getTopics(clusterId, page + 1);
+            }
+        });
     }
 
     resetRecords() {

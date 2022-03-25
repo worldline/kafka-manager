@@ -23,7 +23,7 @@
                                         </ng-select>
                                     </ng-container>
                                     <ng-container *ngIf="getFormType(setting) === 'values'">
-                                        <ng-select class="settings-select" [readonly]="this.settings[setting]?.readOnly" formControlName="{{setting}}" labelForId="setting-{{setting}}" id="setting-{{setting}}">
+                                        <ng-select class="settings-select" [multiple]="this.settings[setting]?.multiple" [readonly]="this.settings[setting]?.readOnly" formControlName="{{setting}}" labelForId="setting-{{setting}}" id="setting-{{setting}}">
                                             <ng-option [value]="value" *ngFor="let value of this.settings[setting]?.values">{{value}}</ng-option>
                                         </ng-select>
                                     </ng-container>
